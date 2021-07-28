@@ -1,0 +1,45 @@
+<section style="min-height: 50vh;" *ngIf="data" class="container">
+    <div class="row">
+        <div class="col-12 col-lg-8">
+
+            
+
+            <div *ngIf="data.articles != null && data.articles?.length != 0;else other">
+              <h1 *ngIf="data.type == 'search';else othertext" class="h5" style="color: #000748;">Hasil Pencarian <span class="font-weight-bold">{{data.keyword}}</span> </h1>
+
+              <ng-template #othertext>
+                <h1 class="h5" style="color: #000748;"><span class="font-weight-bold">{{data.type}}</span></h1>
+              </ng-template>
+              
+
+              <a *ngFor="let article of data.articles" [href]="'/article/' + article.id" style="text-decoration: none;">
+                <div class="card mb-3" style="border-radius: 20px; border: none; box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.25);">
+                        <div class="row no-gutters" style="height: 167px;">
+                          <div class="col-4">
+                            <img [src]="baseUrl + article.image" style="object-fit: cover; width: 100%; height: 167px; border-radius: 20px 0 0 20px;" alt="...">
+                          </div>
+                          <div class="col-8">
+                            <div class="card-body px-2 py-4" style="height: 100%;">
+                              <h3 class="card-title d-block mb-0" style="font-weight: bold; color: #000748; height: 25px; overflow: hidden;" [innerHTML]="article.title | safeHtml : 5"></h3>
+                              <p class="mb-0 text-muted" style="font-size: 12px;">{{article.date | date: 'MMMM d, y'}}</p>
+                              <p class="mb-0" style="font-size: 15px; color: #515151; overflow: hidden; height: 65px;" [innerHTML]="article.content | safeHtml : 20"></p>
+                            </div>
+                          </div>
+                        </div>
+                  </div>
+            </a>
+            </div>
+           
+            <ng-template #other>
+              <h1 *ngIf="data.type == 'search';else othertext" class="h5" style="color: #000748;">Hasil Pencarian <span class="font-weight-bold">{{data.keyword}}</span> Tidak Ditemukan</h1>
+
+              <ng-template #othertext>
+                <h1 class="h5" style="color: #000748;">Belum Ada Article</h1>
+              </ng-template>
+            </ng-template>
+        </div>
+        <div class="col-12 col-lg-4">
+            <app-vertical-article></app-vertical-article>
+        </div>
+    </div>
+</section>

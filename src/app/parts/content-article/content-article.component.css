@@ -1,0 +1,9 @@
+.figure{
+    width: 100% !important; 
+}
+
+.img-content{
+    width: 100% !important; 
+    height: 400px !important; 
+    border-radius: 20px !important;
+}

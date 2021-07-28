@@ -1,0 +1,34 @@
+<div class="m-3">
+    <p-card>
+
+        <div class="p-grid">
+            <div class="p-col-4">
+                <p-card header="User">
+                    <div class="p-text-center p-text-bold" [ngStyle]="{color:'var(--green-500)', 'font-size.px':30}">
+                        {{data.user}}
+                    </div>
+                </p-card>
+            </div>
+            <div class="p-col-4">
+                <p-card header="Article">
+                    <div class="p-text-center p-text-bold" [ngStyle]="{color:'var(--blue-500)', 'font-size.px':30}">
+                        {{data.article}}
+                    </div>
+                </p-card>
+            </div>
+            <div class="p-col-4">
+                <p-card header="Slideshow">
+                    <div class="p-text-center p-text-bold" [ngStyle]="{color:'var(--indigo-500)', 'font-size.px':30}">
+                        {{data.slideshow}}
+                    </div>
+                </p-card>
+            </div>
+        </div>
+        
+        <div class="p-d-flex p-jc-center">
+
+            <p-chart width="560px" type="doughnut" [data]="chart"></p-chart>
+        </div>
+
+    </p-card>
+</div>

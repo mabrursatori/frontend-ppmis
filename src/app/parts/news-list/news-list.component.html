@@ -1,0 +1,28 @@
+<!-- START NEWS -->
+<div *ngIf="data.list.length != 0">
+  <section  class="news" style=" padding: 30px;" [ngStyle]="{'background-color': background}">
+      <div  class="container">
+        <h4 data-aos="fade-up" class="title-news text-center text-lg-left">{{data.title}}</h4>
+        <div class="row d-flex justify-content-center mb-2">
+          <div *ngFor="let item of data.list" data-aos="fade-up" class="col-xs-12 col-sm-12 col-md-6 col-lg-4 d-flex mb-3 mb-lg-0 justify-content-center">
+            <a [href]="'/article/' + item.id" style="text-decoration: none;">
+              <div class="card" style="width: 18rem; border: none; border-radius: 20px 20px 0 0; background: transparent; overflow: hidden;">
+                <img  [src]="baseUrl + item.image" class="card-img-top img-list" >
+                <div class="card-body p-0">
+                  <h5 class="card-title news-title m-0"> {{ item.title }} </h5>
+                  <p class="news-date m-0">{{item.date | date:	'MMM d, y'}}</p>
+                  <p class="card-text news-content m-0" [innerHTML]="item.content | safeHtml : 7"></p>
+                </div>
+              </div>
+            </a>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col text-center" >
+            <a class="btn btn-primary" [href]="'/list-article/' + data.type" data-aos="fade-up" style="background-color: #000748; border: #000748;">Lihat Lainnya</a>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- END NEWS -->
+</div>

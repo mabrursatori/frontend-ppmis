@@ -1,0 +1,20 @@
+<section *ngIf="data"  class="history" style="margin-bottom: 40px;">
+    <div class="container">
+      <div class="row">
+        <div data-aos="fade-up" class="col-12 col-lg-6 px-xs-3">
+          <figure class="figure">
+            <img [src]="baseUrl + data.imageHistory" class="figure-img img-fluid rounded" style="width: 100% !important;">
+          </figure>
+        </div>
+        <div data-aos="fade-up" data-aos-delay="1000" class="col-12 col-lg-6 px-xs-3">
+          <a [href]="'/article/history'" style="text-decoration: none;;">
+            <h4 class="title-history h3"> {{data.titleHistory}} </h4>
+          </a>
+          <div>
+            <span [innerHTML]="data.contentHistory | safeHtml: 130"></span>
+            <a [href]="'/article/history'" style="color: #000748;"> Baca Selengkapnya...</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>

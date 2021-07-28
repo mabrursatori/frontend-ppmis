@@ -1,0 +1,21 @@
+
+<div class="p-d-flex p-jc-center" style="height: 100vh;">
+    
+    
+        <p-card class="p-as-center" header="Selamat Datang!">
+            <div class="p-my-2 p-field p-d-flex p-jc-between">
+                <label for="username">Username</label>
+                <input id="username" type="text" [(ngModel)]="user.username" class="p-ml-3" pInputText />
+            </div>
+            <div class="p-my-2 p-d-flex p-jc-between">
+                <label for="password">Password</label>
+                <p-password id="password" class="p-ml-4" [(ngModel)]="user.password"></p-password>             
+            </div>
+            <div class="p-d-flex p-jc-center">
+                <button pButton type="button" class="p-button-raised" (click) ="login()" label="Login" ></button>
+            </div>
+        </p-card>
+    
+  <!-- toast message -->
+  <p-toast></p-toast>
+</div>

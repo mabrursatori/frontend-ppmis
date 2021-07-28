@@ -1,0 +1,30 @@
+/* NAVBAR */
+.text-brand{
+    color: #28CE0D;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 30px;
+}
+
+
+.nav-link:hover {
+    color: #28CE0D !important;
+}
+
+.nav-item:hover {
+    border-bottom: #28CE0D solid 2px;
+}
+
+.input-search{
+    background: transparent;
+    border: none;
+    border-radius: 0;
+    border-bottom: 2px white solid;
+    transition: display 0.3s;
+}
+
+.dropdown-item:hover {
+    background-color: transparent;
+    color: #28CE0D !important;
+}
+/* AKHIR NAVBAR */

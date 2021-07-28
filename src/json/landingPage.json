@@ -1,0 +1,21 @@
+{
+   
+    "fitur" : [
+        {
+            "imageUrl" : "assets/quran.svg",
+            "caption" : "Program Tahfidz Quran"
+        },
+        {
+            "imageUrl" : "assets/kitab.svg",
+            "caption" : "Program Qiroatul Kutub"
+        },
+        {
+            "imageUrl" : "assets/ustadz.svg",
+            "caption" : "Pengajar Yang Berkompeten"
+        },
+        {
+            "imageUrl" : "assets/kubah.svg",
+            "caption" : "Fasilitas Yang Mendukung"
+        }
+    ]
+}

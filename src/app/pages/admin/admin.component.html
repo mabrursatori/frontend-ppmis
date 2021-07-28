@@ -1,0 +1,75 @@
+
+  <mat-toolbar color="primary">
+    <button  mat-icon-button class="example-icon" (click)="drawer.toggle()" aria-label="Example icon-button with menu icon">
+      <mat-icon>menu</mat-icon>
+    </button>
+    <a routerLink="/" style="color: white; text-decoration: none;">
+      <span>My App</span>
+    </a>
+    <span class="example-spacer"></span>
+    <button mat-icon-button (click)="showConfirm()" class="example-icon favorite-icon ml-auto mr-1" aria-label="Example icon-button with heart icon">
+      <mat-icon>logout</mat-icon>
+    </button>
+ 
+  </mat-toolbar>
+  <mat-drawer-container class="container-sidenav" autosize>
+    <mat-drawer class="sidenav" #drawer mode="side" opened>
+      <mat-nav-list>
+
+        <mat-list-item [routerLink]="['/admin/dashboard']">
+          <mat-icon matListIcon>dashboard</mat-icon>
+          <h3 matLine>Dashboard</h3>
+        </mat-list-item>
+        <mat-list-item routerLink="/admin/profile">
+          <mat-icon matListIcon>person</mat-icon>
+          <h3 matLine>Profile</h3>
+        </mat-list-item>
+        <mat-list-item routerLink="/admin/slideshow">
+          <mat-icon matListIcon>image</mat-icon>
+          <h3 matLine>Image</h3>
+        </mat-list-item>
+        <mat-list-item routerLink="/admin/contact">
+          <mat-icon matListIcon>list</mat-icon>
+          <h3 matLine>Media Social</h3>
+        </mat-list-item>
+        <mat-list-item routerLink="/admin/article">
+          <mat-icon matListIcon>description</mat-icon>
+          <h3 matLine>Article</h3>
+        </mat-list-item>
+        <mat-list-item routerLink="/admin/user">
+          <mat-icon matListIcon>account_circle</mat-icon>
+          <h3 matLine>User</h3>
+        </mat-list-item>
+
+      </mat-nav-list>
+      
+    </mat-drawer>
+    <mat-drawer-content class="sidenav-content">
+      <router-outlet ></router-outlet>
+    </mat-drawer-content>
+  </mat-drawer-container>
+
+   
+
+  <!-- toast confirm -->
+  <p-toast position="center" key="c" [baseZIndex]="5000">
+    <ng-template let-message pTemplate="message">
+        <div class="p-flex p-flex-column" style="flex: 1">
+            <div class="p-text-center">
+                <i class="pi pi-exclamation-triangle" style="font-size: 3rem"></i>
+                <h4>{{message.summary}}</h4>
+                <p>{{message.detail}}</p>
+            </div>
+            <div class="p-grid p-fluid">
+                <div class="p-col-6">
+                    <button type="button" pButton (click)="onConfirm()" label="Ya" class="p-button-success"></button>
+                </div>
+                <div class="p-col-6">
+                    <button type="button" pButton (click)="onReject()" label="Tidak" class="p-button-secondary"></button>
+                </div>
+            </div>
+        </div>
+    </ng-template>
+</p-toast>
+
+  

@@ -1,0 +1,117 @@
+
+<div class="m-3">
+    <p-card>
+       
+          <!-- START TABLE -->
+          <p-table styleClass="p-datatable-sm" #dt1 [value]="articles" dataKey="id" [loading]="loading"  [paginator]="true" [rows]="5" [showCurrentPageReport]="true" 
+          currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" [rowsPerPageOptions]="[5, 10,25,50]"
+          [globalFilterFields]="['title', 'type']">
+          <ng-template pTemplate="caption">
+              <div class="p-d-flex">
+                  <h2 class="p-mr-auto p-my-auto">Article</h2>
+                  <p-button type="button" icon="pi pi-plus" styleClass=" p-ml-auto p-mr-1" (click)="showDialog()"></p-button>
+                  <span class="p-input-icon-left  p-my-auto">
+                      <i class="pi pi-search"></i>
+                      <input pInputText type="text" (input)="dt1.filterGlobal($event.target.value, 'contains')" placeholder="Search keyword" />
+                  </span>
+              </div>
+          </ng-template>
+              <ng-template pTemplate="header">
+                  <tr>
+                      <th>No</th>
+                      <th>Title</th>
+                      <th>Image</th>
+                      <th>Date</th>
+                      <th>Type</th>
+                      <th>Action</th>
+                  </tr>
+              </ng-template>
+              <ng-template pTemplate="body" let-item>
+                  <tr>
+                      <td>{{number }}</td>
+                      <td>{{item.title}}</td>
+                      <td><img [src]="baseUrl + item.image" [alt]="item.image" [style]="{'width': '150px', 'height': '100px', 'object-fit' : 'cover'}" class="p-shadow-4" /></td>
+                      <td>{{item.date | date: 'dd-MM-yyyy'}}</td>
+                      <td>{{item.type}}</td>
+                      <td>
+                          <button pButton pRipple type="button" icon="pi pi-eye" class="p-button-rounded mr-1"  (click)="showDialog(item, true)"></button>
+                          <button pButton pRipple type="button" icon="pi pi-pencil" class="p-button-rounded p-button-success mr-1" (click)="showDialog(item)"></button>
+                          <button pButton pRipple type="button" icon="pi pi-trash" class="p-button-rounded p-button-danger mr-1" (click)="showConfirm(item)"></button>
+                      </td>
+                  </tr>
+              </ng-template>
+              <ng-template pTemplate="paginatorleft">
+                  
+              </ng-template>
+              <ng-template pTemplate="paginatorright">
+                  <p-button type="button" icon="pi pi-cloud" styleClass="p-button-text"></p-button>
+              </ng-template>
+          </p-table>
+
+
+          <!-- start dialog -->
+    <p-dialog header="Article" [(visible)]="display" *ngIf="display" [style]="{'width':'800px'}">
+        <div [hidden]="hiddenForm" *ngIf="selectedItem">
+                    
+                <div class="p-fluid">
+                    <div class="p-field">
+                        <label for="title">Title</label>
+                        <input id="title" type="text" [(ngModel)] = "selectedItem.title" pInputText> 
+                    </div>
+                    <div class="p-field">
+                        <label for="image">Image</label>
+                        <p-fileUpload name="myfile[]" customUpload="true" (uploadHandler)="onUpload($event)"></p-fileUpload>
+                    </div>
+                    <div class="p-field">
+                        <label for="caption">Caption</label>
+                        <input id="caption" type="text" [(ngModel)] = "selectedItem.caption" pInputText> 
+                    </div>
+                    <div class="p-field">
+                        
+                        <p-dropdown [options]="type" [(ngModel)]="selectedType" optionLabel="name"> 
+                        </p-dropdown>
+                    </div>
+                    <div class="p-field">
+                        <label for="">Content</label>
+                        <p-editor [(ngModel)]="selectedItem.content" [style]="{'height':'320px'}"></p-editor>
+                    </div>
+                    <input type="hidden" [(ngModel)]="selectedItem.image">
+                    <input type="hidden" [(ngModel)]="selectedItem.id">
+                </div>
+                <button pButton type="button" label="Success" class="p-button-success" icon="pi pi-check" iconPos="left" (click)="onClick(param)"></button>
+          
+        </div>
+        <div [hidden]="!hiddenForm">
+            
+            <h1>{{selectedItem.title}}</h1>
+            <img [src]="baseUrl + selectedItem.image" [alt]="selectedItem.image" [style]="{'width':'100%'}" class="p-shadow-4 mb-1" />
+            <p [style]="{'font-size': '12px', 'color' : 'gray'}">{{selectedItem.caption}}</p>
+            <div [innerHTML]="selectedItem.content | safeHtml"></div>
+        </div>
+    </p-dialog>
+    </p-card>
+</div>
+
+<!-- toast message -->
+<p-toast></p-toast>
+
+<!-- toast confirm -->
+<p-toast position="center" key="c" [baseZIndex]="5000">
+    <ng-template let-message pTemplate="message">
+        <div class="p-flex p-flex-column" style="flex: 1">
+            <div class="p-text-center">
+                <i class="pi pi-exclamation-triangle" style="font-size: 3rem"></i>
+                <h4>{{message.summary}}</h4>
+                <p>{{message.detail}}</p>
+            </div>
+            <div class="p-grid p-fluid">
+                <div class="p-col-6">
+                    <button type="button" pButton (click)="onConfirm()" label="Ya" class="p-button-success"></button>
+                </div>
+                <div class="p-col-6">
+                    <button type="button" pButton (click)="onReject()" label="Tidak" class="p-button-secondary"></button>
+                </div>
+            </div>
+        </div>
+    </ng-template>
+</p-toast>

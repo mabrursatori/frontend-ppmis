@@ -1,0 +1,91 @@
+<div class="m-3">
+    <p-card>
+
+        <p-table styleClass="p-datatable-sm" #dt1 [value]="users" dataKey="id" [loading]="loading"  [paginator]="true" [rows]="5" [showCurrentPageReport]="true" 
+        currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" [rowsPerPageOptions]="[5, 10,25,50]"
+        [globalFilterFields]="['username']">
+        <ng-template pTemplate="caption">
+            <div class="p-d-flex">
+                <h2 class="p-mr-auto p-my-auto">User</h2>
+                <p-button type="button" icon="pi pi-plus" styleClass=" p-ml-auto p-mr-1" (click)="showDialog()"></p-button>
+                <span class="p-input-icon-left  p-my-auto">
+                    <i class="pi pi-search"></i>
+                    <input pInputText type="text" (input)="dt1.filterGlobal($event.target.value, 'contains')" placeholder="Search keyword" />
+                </span>
+            </div>
+        </ng-template>
+            <ng-template pTemplate="header">
+                <tr>
+                    <th>No</th>
+                    <th>Username</th>
+                    <th>Action</th>
+                </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-item>
+                <tr>
+                    <td>{{item.id }}</td>
+                  
+                    <td>{{item.username}}</td>
+                    <td>
+                       
+                        <button pButton pRipple type="button" icon="pi pi-pencil" class="p-button-rounded p-button-success mr-1" (click)="showDialog(item)"></button>
+                        <button pButton pRipple type="button" icon="pi pi-trash" class="p-button-rounded p-button-danger mr-1" (click)="showConfirm(item)"></button>
+                    </td>
+                </tr>
+            </ng-template>
+            <ng-template pTemplate="paginatorleft">
+                
+            </ng-template>
+            <ng-template pTemplate="paginatorright">
+                <p-button type="button" icon="pi pi-cloud" styleClass="p-button-text"></p-button>
+            </ng-template>
+        </p-table>
+
+
+
+        <!-- start dialog -->
+    <p-dialog header="Title" [(visible)]="display" *ngIf="display">
+        <div *ngIf="selectedUser">
+                <div class="p-fluid"> 
+                    <div class="p-field">
+                        <label for="username">Username</label>
+                        <input id="username" type="text" [(ngModel)] = "selectedUser.username" pInputText> 
+                    </div>
+                    <div class="p-field">
+                        <label for="password">Username</label>
+                        <input id="password" type="password" [(ngModel)] = "selectedUser.password" pInputText> 
+                    </div>
+                    <input type="hidden" [(ngModel)]="selectedUser.id">
+                </div>
+                <button pButton type="button" label="Success" class="p-button-success" icon="pi pi-check" iconPos="left" (click)="onClick(param)"></button>
+          
+        </div>
+    </p-dialog>
+
+
+     <!-- toast message -->
+     <p-toast></p-toast>
+
+     <!-- toast confirm -->
+     <p-toast position="center" key="c" [baseZIndex]="5000">
+         <ng-template let-message pTemplate="message">
+             <div class="p-flex p-flex-column" style="flex: 1">
+                 <div class="p-text-center">
+                     <i class="pi pi-exclamation-triangle" style="font-size: 3rem"></i>
+                     <h4>{{message.summary}}</h4>
+                     <p>{{message.detail}}</p>
+                 </div>
+                 <div class="p-grid p-fluid">
+                     <div class="p-col-6">
+                         <button type="button" pButton (click)="onConfirm()" label="Ya" class="p-button-success"></button>
+                     </div>
+                     <div class="p-col-6">
+                         <button type="button" pButton (click)="onReject()" label="Tidak" class="p-button-secondary"></button>
+                     </div>
+                 </div>
+             </div>
+         </ng-template>
+     </p-toast>
+     
+    </p-card>
+</div>

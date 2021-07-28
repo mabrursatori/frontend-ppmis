@@ -1,0 +1,57 @@
+<div class="m-3">
+    <p-card>
+        <p-table [value]="contacts">
+            <ng-template pTemplate="header">
+                <tr>
+                    <th>Id</th>
+                    <th>Name</th>
+                    <th>Label</th>
+                    <th>Url</th>
+                    <th>Action</th>
+                </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-contact>
+                <tr>
+                    <td>{{contact.id}}</td>
+                    <td>{{contact.name}}</td>
+                    <td>{{contact.label}}</td>
+                    <td>{{contact.url}}</td>
+                    <td>
+                        <button pButton pRipple type="button" icon="pi pi-pencil" class="p-button-rounded p-button-success mr-1" (click)= "showDialog(contact)"></button>
+                    </td>
+                </tr>
+            </ng-template>
+        </p-table>
+
+        <p-toast></p-toast>
+
+        <!-- start dialog -->
+     <p-dialog header="Edit" [(visible)]="display">
+        <div *ngIf="selectedItem">
+            
+                <div class="p-fluid">
+                    
+                    <div class="p-field">
+                        <label for="lastname1">Label</label>
+                        <input id="lastname1" type="text" [(ngModel)] = "selectedItem.label" pInputText> 
+                    </div>
+                    <div class="p-field">
+                        <label for="lastname1">Url</label>
+                        <input id="lastname1" type="text" [(ngModel)] = "selectedItem.url" pInputText> 
+                    </div>
+                    <input type="text" [hidden]="true" [(ngModel)]="selectedItem.id">
+                    <input type="text" [hidden]="true" [(ngModel)]="selectedItem.name">
+                </div>
+                <button pButton type="button" label="Success" class="p-button-success" icon="pi pi-check" iconPos="left" (click)="onSave()"></button>
+          
+        </div>
+    </p-dialog>
+    </p-card>
+
+
+
+     
+</div>
+
+
+

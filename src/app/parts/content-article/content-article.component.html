@@ -1,0 +1,46 @@
+<div *ngIf="isHistory;else other">
+    <section *ngIf="data" class="content-article container">
+        <div class="row ">
+            <div class="col-12 col-lg-8">
+                <h1 class="h1"  style="font-weight: bold; color: #000748">{{data.profile.titleHistory}}</h1>
+                
+            </div>
+        </div>
+    
+        <div class="row">
+            <div class="col-12 col-lg-8 ">
+                <figure class="figure">
+                    <img [src]="baseUrl + data.profile.imageHistory" class="figure-img img-fluid rounded img-content" >
+                  </figure>
+                  <div  [innerHTML]="data.profile.contentHistory | safeHtml"></div>
+            </div>
+            <div class="col-12 col-lg-4">
+                <app-vertical-article [data]="data.biografi"></app-vertical-article>
+            </div>
+        </div>
+    </section>
+</div>
+
+<ng-template #other>
+    <section *ngIf="data" class="content-article container">
+        <div class="row ">
+            <div class="col-12 col-lg-8">
+                <h1 class="h1 mb-0"  style="font-weight: bold; color: #000748">{{data.article.title}}</h1>
+                <p class="text-muted">{{data.article.date | date: 'MMMM d, y'}}</p>
+            </div>
+        </div>
+    
+        <div class="row">
+            <div class="col-12 col-lg-8 ">
+                <figure class="figure">
+                    <img [src]="baseUrl + data.article.image" class="figure-img img-fluid rounded img-content">
+                    <figcaption class="figure-caption">{{data.article.caption}}</figcaption>
+                  </figure>
+                  <div  [innerHTML]="data.article.content | safeHtml "></div>
+            </div>
+            <div class="col-12 col-lg-4">
+                <app-vertical-article [data]="data.biografi"></app-vertical-article>
+            </div>
+        </div>
+    </section>
+</ng-template>

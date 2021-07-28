@@ -1,0 +1,64 @@
+<div *ngIf="data">
+<!-- START NAVBAR -->
+<nav data-aos="fade-down"  class="navbar navbar-expand-lg navbar-light" [style.background-color]="backgroundColor" style="z-index: 1;" [style.margin-bottom]="marginBottom" >
+    <div class="container">
+     
+        <a class="navbar-brand" routerLink="/">
+          <div *ngIf="data.profile.isLogo == 1;else other">
+            <img style="height: 60px;" [src]="baseUrl + data.profile.imageLogo" alt="">
+        </div>
+        <ng-template #other>
+          <h1 class="text-brand">PP. MIS</h1>  
+        </ng-template>
+        </a>
+      
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+    
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mx-auto">
+          <li class="nav-item active">
+            <a class="nav-link" [class.text-white]="textWhite" [href]="baseUrl + data.profile.registration">Pendaftaran</a>
+          </li>
+          <li class="nav-item active">
+            <a class="nav-link" [class.text-white]="textWhite" [href]="'/article/history'">Sejarah Pesantren</a>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" [class.text-dark]="!textWhite" [class.text-white]="textWhite" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              Biografi
+            </a>
+            
+            <div *ngIf="data.biografi?.length != 0" class="dropdown-menu"  [style.background-color]="backgroundColor" aria-labelledby="navbarDropdown">
+              <a class="dropdown-item" *ngFor="let biografi of data.biografi" [href]="'/article/' + biografi.id" style="font-size: 12px;" [class.text-white]="textWhite" >{{biografi.title}}</a>
+            </div>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" [class.text-dark]="!textWhite" [class.text-white]="textWhite" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              Event
+            </a>
+            <div *ngIf="data.event?.length != 0" class="dropdown-menu" [style.background-color]="backgroundColor" aria-labelledby="navbarDropdown">
+              <a class="dropdown-item" *ngFor="let event of data.event" [href]="'/article/' + event.id" style="font-size: 12px;" [class.text-white]="textWhite" href="#">{{event.title}}</a>
+            </div>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" [class.text-dark]="!textWhite" [class.text-white]="textWhite" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              Bathsul Masa'il
+            </a>
+            <div *ngIf="data.bathsul?.length != 0" class="dropdown-menu" [style.background-color]="backgroundColor" aria-labelledby="navbarDropdown">
+              <a class="dropdown-item" style="font-size: 12px;" *ngFor="let bathsul of data.bathsul" [href]="'/article/' + bathsul.id"  [class.text-white]="textWhite" href="#">{{bathsul.title}}</a>
+            </div>
+          </li>
+        </ul>
+        
+        <div class="form-inline my-2 my-lg-0 form-search" >
+          <input #formSearch (keydown)="onKeydown($event)" [@openClose]="isOpen ? 'open' : 'closed'" class="form-control mr-sm-2 input-search" style="width: 100px;"  type="search" placeholder="Search" aria-label="Search" [(ngModel)]="keyword">
+        </div>
+        <button (click)="onSearch()" style="z-index: 1; background: transparent; border: none;" >
+          <i class="pi pi-search" style="color: white;" ></i>
+        </button>
+      </div>
+    </div>
+  </nav>
+  <!-- END NAVBAR -->
+</div>

@@ -1,0 +1,46 @@
+<!-- START FOOTER -->
+<div *ngIf="data">
+  <footer class="footer" >
+      <div class="container">
+        <div class="row" style="padding: 50px; ">
+          <div class="col-12 text-center col-lg-4 mb-3 mb-lg-0 justify-content-center" data-aos="fade-up" >
+              <h5 class="footer-title d-block text-center text-lg-left">Media Social</h5>
+              <a [href]="this.data[0].url" target="_blank" class="footer-text d-block text-center text-lg-left mx-auto mx-lg-0">
+                {{this.data[0].label}}
+              </a>
+              <a [href]="this.data[1].url" target="_blank" class="footer-text d-block text-center text-lg-left mx-auto mx-lg-0">
+                {{this.data[1].label}}
+              </a>
+              <a [href]="this.data[2].url" target="_blank" class="footer-text d-block text-center text-lg-left mx-auto mx-lg-0">
+                {{this.data[2].label}}
+              </a>
+            
+          </div>
+          <div class="col-12 col-lg-4 mb-3 mb-lg-0 justify-content-center" data-aos="fade-up" data-aos-delay="500">  
+              <h5 class="footer-title d-block text-center text-lg-left">Contact</h5>
+              <a [href]="'tel:'+this.data[3].url" target="_blank" class="footer-text d-block text-center text-lg-left mx-auto mx-lg-0">
+                {{this.data[3].label}}
+              </a>    
+          </div>
+          <div class="col-12 col-lg-4 mb-3 mb-lg-0 justify-content-center" data-aos="fade-up" data-aos-delay="1000">
+            <h5 class="footer-title d-block text-center text-lg-left">Location</h5>
+              <a [href]="this.data[4].url" target="_blank"  class="footer-text d-block text-center text-lg-left mx-auto mx-lg-0">
+                {{this.data[4].label}}
+              </a>
+            
+          </div>
+        </div>
+      </div>
+      <div style="background-color: #F8F8F8;">
+  
+          <div class="container" >
+              <div class="row align-items-center" style="height: 100px; ">
+                <div class="col-12 text-center">
+                  <p>Copyright  © 2021 by <a href="http://mabrur.epizy.com" target="_blank" style="color: #000748;">Mabrur Santri MIS</a></p>
+                </div>
+              </div>
+          </div>
+      </div>
+    </footer>
+    <!-- LAST FOOTER -->
+</div>
