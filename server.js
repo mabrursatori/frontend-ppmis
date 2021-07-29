@@ -5,10 +5,10 @@ const path = require('path');
 const app = express();
 
 // Serve only the static files form the dist directory
-app.use(express.static('./dist/frontend-ppmis'));
+app.use(express.static('./dist/primeng-demo'));
 
 app.get('/*', (req, res) =>
-    res.sendFile('index.html', {root: 'dist/frontend-ppmis/'}),
+    res.sendFile('index.html', {root: 'dist/primeng-demo/'}),
 );
 
 // Start the app by listening on the default Heroku port

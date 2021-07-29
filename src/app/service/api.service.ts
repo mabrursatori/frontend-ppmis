@@ -10,7 +10,7 @@ export class ApiService {
   serverUrl:string;
   isLogin : boolean = true;
   constructor(public http:HttpClient) {
-    this.serverUrl = config.BaseUrl;
+    this.serverUrl = "https://server-ppmis.herokuapp.com";
   }
 
    setLogin(){
