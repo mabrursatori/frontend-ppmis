@@ -26,7 +26,6 @@ import {MessagesModule} from 'primeng/messages';
 import {MessageModule} from 'primeng/message'
 import {ChartModule} from 'primeng/chart';
 import { SafeHtmlPipe } from 'src/app/pipe/safe-html.pipe';
-import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
 import {CascadeSelectModule} from 'primeng/cascadeselect';
 import {DropdownModule} from 'primeng/dropdown';
 import {EditorModule} from 'primeng/editor';
@@ -97,7 +96,6 @@ const routes : Routes =[
     ToastModule,
     MessageModule,
     MessagesModule,
-    CKEditorModule,
     CascadeSelectModule,
     DropdownModule,
     EditorModule,

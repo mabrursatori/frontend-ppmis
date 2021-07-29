@@ -1,6 +1,6 @@
 <!-- CARAOSEL -->
-<section *ngIf="data" class="data" style="position: absolute; top: 0; width: 100%;" [style.margin-top]="marginTop" [style.margin-bottom]="marginBottom">
-    <ngb-carousel data-aos="fade-down"    [interval]="5000" *ngIf="data" [showNavigationArrows]="showNavigationArrows" [showNavigationIndicators]="showNavigationIndicators">
+<section data-aos="fade-down" *ngIf="data" class="data" style="position: absolute; top: 0; width: 100%;" [style.margin-top]="marginTop" [style.margin-bottom]="marginBottom">
+    <ngb-carousel     [interval]="5000" *ngIf="data" [showNavigationArrows]="showNavigationArrows" [showNavigationIndicators]="showNavigationIndicators">
       <ng-template  ngbSlide *ngFor="let carousel of data" style="position: relative;">
         <div class="picsum-img-wrapper">
           <img [src]="baseUrl + carousel.image" alt="Random slide" style="object-fit: cover; width: 100%; height: 412px;">

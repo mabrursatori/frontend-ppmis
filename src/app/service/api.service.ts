@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
-import { CookieService } from 'ngx-cookie-service';
 import { User } from '../models/user';
 import * as config from "../../json/config.json"
 
@@ -10,7 +9,7 @@ import * as config from "../../json/config.json"
 export class ApiService {
   serverUrl:string;
   isLogin : boolean = true;
-  constructor(public http:HttpClient, private cookieService: CookieService) {
+  constructor(public http:HttpClient) {
     this.serverUrl = config.BaseUrl;
   }
 

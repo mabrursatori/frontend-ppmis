@@ -1,6 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import {NgbCarouselConfig} from '@ng-bootstrap/ng-bootstrap';
 import * as landingPage from '../../../json/landingPage.json';
+import * as config from "../../../json/config.json"
 
 @Component({
   selector: 'app-caraosel',
@@ -10,7 +11,7 @@ import * as landingPage from '../../../json/landingPage.json';
 })
 export class CaraoselComponent implements OnInit {
   images = [1055, 194, 368].map((n) => `https://picsum.photos/id/${n}/900/500`);
-  baseUrl: string = "http://localhost:3000/"
+  baseUrl: string;
   @Input() marginBottom;
   @Input() marginTop;
   @Input() data: any;
@@ -26,6 +27,7 @@ export class CaraoselComponent implements OnInit {
 
   ngOnInit(): void {
   //  console.log(this.data)
+  this.baseUrl = config.BaseUrl + "/"
   }
 
 }

@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { ApiService } from 'src/app/service/api.service';
-import { CookieService } from 'ngx-cookie-service';
 import {User} from '../../models/user'
 import { Router } from '@angular/router';
 import { MessageService } from 'primeng/api';
@@ -10,14 +9,13 @@ import { MessageService } from 'primeng/api';
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css'],
-  providers: [ CookieService, MessageService ]
+  providers: []
 })
 export class LoginComponent implements OnInit {
   user : any;
   
 
   constructor(public apiService : ApiService, 
-    private cookieService: CookieService,
     private router: Router,
     private messageService: MessageService) {
       

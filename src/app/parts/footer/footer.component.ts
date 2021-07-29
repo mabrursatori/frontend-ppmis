@@ -8,7 +8,7 @@ import { ApiService } from 'src/app/service/api.service';
   styleUrls: ['./footer.component.css']
 })
 export class FooterComponent implements OnInit {
-data: any;
+@Input() data: any;
 facebook: any = {
   name: null,
   laben: null,
@@ -27,13 +27,13 @@ location: any;
 
     
 
-    this.get()
+  //  this.get()
   }
 
   get(){
     this.apiService.get("/footer").subscribe(
       response => {
-        this.data = response;
+       // this.data = response;
       },
       error => {
 

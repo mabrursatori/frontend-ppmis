@@ -32,9 +32,10 @@ export class NavbarComponent implements OnInit {
   @Input() marginBottom;
   @Input() backgroundColor;
   @Input() textWhite: boolean;
-   data? : any = {
+  @Input() data? : any = {
     profile : {
-      isLogo: 0
+      registration: null,
+      isLogo: null
     }
   }
   isLogo: number;
@@ -75,9 +76,10 @@ export class NavbarComponent implements OnInit {
   }
 
   get(){
-    this.apiService.get("/home").subscribe(
+    this.apiService.get("/navbar").subscribe(
       response => {
-        this.data = response;
+       // this.data = response;
+        //console.log(response);
       },
       error => {
         console.log(error)

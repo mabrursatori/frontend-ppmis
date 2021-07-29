@@ -19,7 +19,8 @@ export class HomeComponent implements OnInit {
   white: string = "white";
   gray: string = "#F8F8F8"
   data: any = {
-    slideshow: null
+    slideshow: null,
+    profile: null
   }
 
   navbar: any ;
@@ -55,12 +56,33 @@ export class HomeComponent implements OnInit {
     this.get();
   }
 
+
+  get(){
+    this.apiService.get("/home").subscribe(
+      response => {
+        this.data = response;
+        this.slideshow = this.data.slideshow;
+         this.profile = this.data.profile;
+         console.log(response)
+         this.biografi.list = this.data.biografi;
+         this.bathsul.list = this.data.bathsul;
+         this.event.list = this.data.event;
+         this.footer = this.data.contacts;
+     // console.log(this.footer)
+      //console.log(this.data.contacts)
+     // console.log(this.data.biografi)
+      },
+      error => {
+
+      }
+    )
+  }
+
   @HostListener('window:resize', ['$event'])
     getScreenSize(event?) {
           this.scrHeight = window.innerHeight;
           this.scrWidth = window.innerWidth;
          // console.log(this.scrWidth);
-
             if(this.scrWidth < 575){
               this.isCarouselHidden = true;
               this.isFeaturesHidden = true;
@@ -77,24 +99,5 @@ export class HomeComponent implements OnInit {
     }
 
 
-    get(){
-      this.apiService.get("/home").subscribe(
-        response => {
-          this.navbar = response;
-          this.data = response;
-          this.slideshow = this.data.slideshow;
-          this.profile = this.data.profile;
-          this.biografi.list = this.data.biografi;
-          this.bathsul.list = this.data.bathsul;
-          this.event.list = this.data.event;
-          this.footer = this.data.contacts;
-       // console.log(this.footer)
-        //console.log(this.data.contacts)
-       // console.log(this.data.biografi)
-        },
-        error => {
-
-        }
-      )
-    }
+    
 }

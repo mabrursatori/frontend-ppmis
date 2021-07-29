@@ -1,17 +1,29 @@
 
-<app-navbar  [marginBottom]="marginBottomNavbar" [backgroundColor]="backgroundColorNavbar" [textWhite]=true></app-navbar>
 
-<app-caraosel [data]="slideshow" [hidden]="isCarouselHidden"></app-caraosel>
 
-<app-features [marginBottom]="marginBottomFeatures" [hidden]="isFeaturesHidden"></app-features>
+<div *ngIf="slideshow;else other">
+    <app-navbar  [marginBottom]="marginBottomNavbar" [backgroundColor]="backgroundColorNavbar" [textWhite]=true [data]="data"></app-navbar>
 
-<app-hero [data]="profile" ></app-hero>
+    <app-caraosel [data]="slideshow" [hidden]="isCarouselHidden"></app-caraosel>
+    
+    <app-features [marginBottom]="marginBottomFeatures" [hidden]="isFeaturesHidden"></app-features>
+    
+    <app-hero [data]="profile" ></app-hero>
+    
+    <app-features [hidden]="isSecondFeaturesHidden"></app-features>
+    
+    <app-news-list [data]="event" [background]="gray"></app-news-list>
+    
+    <app-news-list [data]="biografi" [background]="white"></app-news-list>
+    
+    <app-news-list [data]="bathsul" [background]="gray"></app-news-list>
+    <app-footer [data]="footer" ></app-footer>
+</div>
 
-<app-features [hidden]="isSecondFeaturesHidden"></app-features>
-
-<app-news-list [data]="event" [background]="gray"></app-news-list>
-
-<app-news-list [data]="biografi" [background]="white"></app-news-list>
-
-<app-news-list [data]="bathsul" [background]="gray"></app-news-list>
-<app-footer></app-footer>
+<ng-template #other>
+    <div class="d-flex justify-content-center align-items-center" style="min-height: 100vh;">
+        <div class=" d-inline-block">
+            <p-progressSpinner ></p-progressSpinner>
+        </div>
+    </div>
+</ng-template>

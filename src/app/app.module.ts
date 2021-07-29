@@ -48,6 +48,7 @@ import {MessageModule} from 'primeng/message'
 import { ToastModule } from 'primeng/toast';
 import { SafeHtmlPipe } from './pipe/safe-html.pipe';
 import { ExternalModule } from './external/external.module';
+import {ProgressSpinnerModule} from 'primeng/progressspinner';
 
 @NgModule({
   declarations: [
@@ -94,7 +95,8 @@ import { ExternalModule } from './external/external.module';
     MessageModule,
     MessagesModule,
     ExternalModule,
-    ToastModule
+    ToastModule,
+    ProgressSpinnerModule
   ],
   providers: [
     IsLoginGuard,

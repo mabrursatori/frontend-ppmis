@@ -4,6 +4,7 @@ import {trigger, state, style, animate, transition, query, stagger} from '@angul
 import { HostListener } from "@angular/core";
 import * as landingPage from '../json/landingPage.json'
 import { ApiService } from './service/api.service';
+import AOS from 'aos';
 
 
 
@@ -20,7 +21,7 @@ export class AppComponent {
 
   ngOnInit(): void {
     
-   
+   AOS.init();
 
     
     
