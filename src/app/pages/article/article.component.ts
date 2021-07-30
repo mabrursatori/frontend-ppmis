@@ -16,6 +16,8 @@ marginBottomBreadcrumb: string = "30px";
 id: any;
 data: any;
 history: any;
+footer: any;
+otherArticles: any;
 breadcrumb: string;
   constructor(
     private route: ActivatedRoute,
@@ -41,6 +43,7 @@ breadcrumb: string;
       response => {
         //console.log(response)
         this.data = response;
+        this.footer = this.data.contacts
       },
       error => {
         this.router.navigate(["/error"])
@@ -49,9 +52,10 @@ breadcrumb: string;
   }
 
   getHistory(){
-    this.apiService.get("/home").subscribe(
+    this.apiService.get("/history").subscribe(
       response => {
         this.data = response;
+        this.footer = this.data.contacts;
         this.history = true;
       },
       error => {

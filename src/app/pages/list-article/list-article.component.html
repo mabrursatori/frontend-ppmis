@@ -1,7 +1,18 @@
-<app-navbar [marginBottom]="marginBottomNavbar"  [backgroundColor]="backgroundColorNavbar"></app-navbar>
+<div *ngIf="data; else other">
+    <app-navbar [marginBottom]="marginBottomNavbar"  [backgroundColor]="backgroundColorNavbar" [data]="data"></app-navbar>
+    
+    <app-breadcrumb [marginBottom]="marginBottomBreadcrumb" [status]="breadcrumb"></app-breadcrumb>
+    
+    <app-content-list-article [data]="data" [type]="type" [keyword]="keyword"></app-content-list-article>
+    
+    <app-footer [data]="data?.contacts"></app-footer>
+</div>
 
-<app-breadcrumb [marginBottom]="marginBottomBreadcrumb" [status]="breadcrumb"></app-breadcrumb>
 
-<app-content-list-article [data]="data"></app-content-list-article>
-
-<app-footer></app-footer>
+<ng-template #other>
+    <div class="d-flex justify-content-center align-items-center" style="min-height: 100vh;">
+        <div class=" d-inline-block">
+            <p-progressSpinner ></p-progressSpinner>
+        </div>
+    </div>
+</ng-template>

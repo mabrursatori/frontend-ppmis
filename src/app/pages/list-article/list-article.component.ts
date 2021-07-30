@@ -14,11 +14,7 @@ marginBottomBreadcrumb: string = "30px";
 type: string;
 keyword: string;
 breadcrumb: string;
-data: any = {
-  type: null,
-  keyword: null,
-  articles: null,
-}
+data: any;
 
   constructor(
     private route: ActivatedRoute,
@@ -32,13 +28,11 @@ data: any = {
     
     if(this.type == "search"){
       this.breadcrumb = "Pencarian"
-      this.data.type = this.type;
-      this.data.keyword = this.keyword
       this.get(`/home/search/${this.keyword}`)
     }else{
       this.breadcrumb = this.capitalizeFirstLetter(this.type);
-      this.data.type = this.type;
       this.get(`/home/type/${this.type}`)
+      this.type = this.capitalizeFirstLetter(this.type)
     }
   }
 
@@ -49,7 +43,7 @@ data: any = {
   get(url){
     this.apiService.get(url).subscribe(
       response => {
-        this.data.articles = response;
+        this.data = response;
         //console.log(response)
       },
       error => {

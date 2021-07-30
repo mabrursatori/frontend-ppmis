@@ -15,7 +15,7 @@
                   <div  [innerHTML]="data.profile.contentHistory | safeHtml"></div>
             </div>
             <div class="col-12 col-lg-4">
-                <app-vertical-article [data]="data.biografi"></app-vertical-article>
+                <app-vertical-article [data]="data.otherArticles"></app-vertical-article>
             </div>
         </div>
     </section>
@@ -39,7 +39,7 @@
                   <div  [innerHTML]="data.article.content | safeHtml "></div>
             </div>
             <div class="col-12 col-lg-4">
-                <app-vertical-article [data]="data.biografi"></app-vertical-article>
+                <app-vertical-article [data]="data.otherArticles"></app-vertical-article>
             </div>
         </div>
     </section>

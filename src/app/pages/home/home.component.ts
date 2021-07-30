@@ -63,10 +63,10 @@ export class HomeComponent implements OnInit {
         this.data = response;
         this.slideshow = this.data.slideshow;
          this.profile = this.data.profile;
-         console.log(response)
-         this.biografi.list = this.data.biografi;
-         this.bathsul.list = this.data.bathsul;
-         this.event.list = this.data.event;
+         //console.log(response)
+         this.biografi.list = this.data.biografiList;
+         this.bathsul.list = this.data.bathsulList;
+         this.event.list = this.data.eventList;
          this.footer = this.data.contacts;
      // console.log(this.footer)
       //console.log(this.data.contacts)

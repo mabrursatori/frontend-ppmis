@@ -49,7 +49,7 @@ export class NavbarComponent implements OnInit {
 
   ngOnInit(): void {
     this.baseUrl = config.BaseUrl + "/";
-    this.get()
+   // this.get()
   }
   onSearch(){
     if(this.isOpen){

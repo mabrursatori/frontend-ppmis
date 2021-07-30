@@ -7,6 +7,8 @@ import * as config from "../../../json/config.json"
 })
 export class ContentListArticleComponent implements OnInit {
 @Input() data: any;
+@Input() type: string;
+@Input() keyword: string;
 baseUrl: string;
 
   constructor() { }
