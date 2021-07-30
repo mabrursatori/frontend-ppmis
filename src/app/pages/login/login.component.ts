@@ -9,7 +9,7 @@ import { MessageService } from 'primeng/api';
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css'],
-  providers: []
+  providers: [MessageService]
 })
 export class LoginComponent implements OnInit {
   user : any;
