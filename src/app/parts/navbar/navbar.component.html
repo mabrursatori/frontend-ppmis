@@ -4,7 +4,7 @@
     <div class="container">
      
         <a class="navbar-brand" routerLink="/">
-          <div *ngIf="data.profile">
+          <div *ngIf="data.profile?.isLogo == 1;else other">
               <img style="height: 60px;" [src]="baseUrl + data.profile.imageLogo" alt="">
           </div>
           

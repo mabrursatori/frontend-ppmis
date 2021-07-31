@@ -1,34 +1,48 @@
-<div class="m-3">
-    <p-card>
-
-        <div class="p-grid">
-            <div class="p-col-4">
-                <p-card header="Event">
-                    <div class="p-text-center p-text-bold" [ngStyle]="{color:'var(--green-500)', 'font-size.px':30}">
-                        {{data.event}}
-                    </div>
-                </p-card>
+<div *ngIf="isLoading;else other">
+    <div class="m-3">
+        <p-card>
+    
+            <div class="p-grid">
+                <div class="p-col-4">
+                    <p-card header="Event">
+                        <div class="p-text-center p-text-bold" [ngStyle]="{color:'var(--green-500)', 'font-size.px':30}">
+                            {{data.event}}
+                        </div>
+                    </p-card>
+                </div>
+                <div class="p-col-4">
+                    <p-card header="Biografi">
+                        <div class="p-text-center p-text-bold" [ngStyle]="{color:'var(--blue-500)', 'font-size.px':30}">
+                            {{data.biografi}}
+                        </div>
+                    </p-card>
+                </div>
+                <div class="p-col-4">
+                    <p-card header="Bathsul Masail">
+                        <div class="p-text-center p-text-bold" [ngStyle]="{color:'var(--indigo-500)', 'font-size.px':30}">
+                            {{data.bathsul}}
+                        </div>
+                    </p-card>
+                </div>
             </div>
-            <div class="p-col-4">
-                <p-card header="Biografi">
-                    <div class="p-text-center p-text-bold" [ngStyle]="{color:'var(--blue-500)', 'font-size.px':30}">
-                        {{data.biografi}}
-                    </div>
-                </p-card>
+            
+            <div class="p-d-flex p-jc-center">
+    
+                <p-chart width="560px" type="doughnut" [data]="chart"></p-chart>
             </div>
-            <div class="p-col-4">
-                <p-card header="Bathsul Masail">
-                    <div class="p-text-center p-text-bold" [ngStyle]="{color:'var(--indigo-500)', 'font-size.px':30}">
-                        {{data.bathsul}}
-                    </div>
-                </p-card>
-            </div>
-        </div>
-        
-        <div class="p-d-flex p-jc-center">
-
-            <p-chart width="560px" type="doughnut" [data]="chart"></p-chart>
-        </div>
-
-    </p-card>
+    
+        </p-card>
+    </div>
 </div>
+
+<ng-template #other>
+    <div class="d-flex justify-content-center align-items-center" style="min-height: 100vh;">
+        <div class=" d-inline-block">
+            <p-progressSpinner ></p-progressSpinner>
+            
+        </div>
+    </div>
+</ng-template>
+
+
+

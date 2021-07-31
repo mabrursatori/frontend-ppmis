@@ -13,7 +13,7 @@ import * as config from "../../../../json/config.json"
 export class SlideshowComponent implements OnInit {
   someSlideshow : any;
   baseUrl : string;
-  
+  isLoading: boolean = false;
   param:  string;
   number: number = 1;
   
@@ -40,9 +40,11 @@ selectedImage: any = {
 
  
 getData(){
+  this.isLoading = true;
   this.apiService.getWithToken("/slideshow").subscribe(
     (response) => {
       this.someSlideshow = response
+      this.isLoading = false;
       //console.log(this.someSlideshow);
     },
     (error) => {

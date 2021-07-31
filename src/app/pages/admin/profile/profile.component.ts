@@ -10,6 +10,8 @@ import * as config from "../../../../json/config.json"
   providers: [MessageService]
 })
 export class ProfileComponent implements OnInit {
+  
+  isLoading: boolean = false;
 profile: any = {
   imageLogo: null,
   registration: null,
@@ -64,11 +66,13 @@ data: any ={
   }
 
   get(){
+    this.isLoading = true;
     this.apiService.getWithToken("/profile").subscribe(
       (response) => {
         //console.log(response)
         this.profile = response;
         this.checked = (this.profile.isLogo == 1) ? true : false;
+        this.isLoading = false;
       },
       (error) => {
         console.log(error);
@@ -86,7 +90,7 @@ data: any ={
     this.data.oldImageHistory = this.profile.imageHistory;
     this.apiService.put("/profile", this.data, true).subscribe(
       (response) => {
-        //console.log(response);
+        console.log(response);
         this.messageService.add({severity:'success', summary:'Sucessfull!', detail:'Berhasil Merubah Data!'});
         this.display = false;
         this.get();

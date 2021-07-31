@@ -13,7 +13,7 @@ import { MessageService } from 'primeng/api';
 })
 export class LoginComponent implements OnInit {
   user : any;
-  
+  isLoading: boolean = false;
 
   constructor(public apiService : ApiService, 
     private router: Router,
@@ -31,12 +31,14 @@ export class LoginComponent implements OnInit {
   }
 
   login(){
+    this.isLoading = true;
       this.apiService.post("/login", this.user).subscribe(
         (res) => {
         this.user = res
         //console.log(this.user)
         //this.cookieService.set( 'token', this.user.token );
         localStorage.setItem("appToken", JSON.stringify(this.user) );
+        this.isLoading = false;
         this.router.navigate(['/admin'])
       },
       (error) => {

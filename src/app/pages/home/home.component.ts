@@ -61,6 +61,7 @@ export class HomeComponent implements OnInit {
     this.apiService.get("/home").subscribe(
       response => {
         this.data = response;
+        //console.log(response)
         this.slideshow = this.data.slideshow;
          this.profile = this.data.profile;
          //console.log(response)

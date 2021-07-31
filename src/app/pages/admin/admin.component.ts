@@ -23,7 +23,7 @@ export class AdminComponent implements OnInit {
     private router: Router) { }
 
   ngOnInit(): void {
-    this.apiService.setLogin();
+   this.apiService.setLogin();
   }
 
 

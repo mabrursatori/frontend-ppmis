@@ -10,6 +10,7 @@ import { MessageService } from 'primeng/api';
 })
 export class ContactComponent implements OnInit {
   contacts: any;
+  isLoading: boolean = false;
 
   constructor(private apiService: ApiService,
     private messageService: MessageService) { }
@@ -19,9 +20,11 @@ export class ContactComponent implements OnInit {
   }
 
   get(){
+    this.isLoading = true;
     this.apiService.getWithToken("/contacts").subscribe(
       (response) => {
         this.contacts = response;
+        this.isLoading = false;
        // console.log(this.contacts)
       },
       (error) => {

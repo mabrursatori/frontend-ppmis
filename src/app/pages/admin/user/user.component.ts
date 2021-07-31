@@ -13,6 +13,7 @@ export class UserComponent implements OnInit {
   selectedUser: any;
   param: string;
   display: boolean = false;
+  isLoading: boolean = false;
   data: any = {
     username : null,
     password : null,
@@ -34,9 +35,11 @@ export class UserComponent implements OnInit {
 
 
   get(){
+    this.isLoading = true;
     this.apiService.getWithToken("/users").subscribe(
       response => {
        this.users = response;
+       this.isLoading = false;
       },
       error => {
         console.log(error)

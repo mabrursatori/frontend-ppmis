@@ -13,6 +13,7 @@ import { ApiService } from 'src/app/service/api.service';
 export class DashboardComponent implements OnInit {
   @Input() name;
   chart: any;
+  isLoading: boolean = false;
   data: any = {
     user: null,
     article: null,
@@ -27,6 +28,7 @@ export class DashboardComponent implements OnInit {
     this.apiService.getWithToken("/dashboard").subscribe(
       response => {
         //console.log(response)
+        this.isLoading = true;
         this.data = response;
         this.chart = {
           labels: ['Biografi','Event','Bathsul Masail'],

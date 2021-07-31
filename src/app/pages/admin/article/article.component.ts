@@ -17,6 +17,7 @@ articles: any;
 baseUrl : string;
 selectedItem: any;
 selectedType: any;
+isLoading: boolean = false;
 type: any[];
 editDropdown: boolean = true;
 param: string;
@@ -86,9 +87,11 @@ data: any = {
   }
 
   get(){
+    this.isLoading = true;
     this.apiService.getWithToken("/article").subscribe(
       (response) => {
         this.articles = response;
+        this.isLoading = false;
       },
       (error) =>
       console.log(error)

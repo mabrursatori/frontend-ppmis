@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import { User } from '../models/user';
 import * as config from "../../json/config.json"
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
@@ -9,7 +10,8 @@ import * as config from "../../json/config.json"
 export class ApiService {
   serverUrl:string;
   isLogin : boolean = true;
-  constructor(public http:HttpClient) {
+  constructor(public http:HttpClient,
+    private router: Router) {
     this.serverUrl = config.BaseUrl;
   }
 
@@ -17,11 +19,12 @@ export class ApiService {
     this.getToken();
     this.http.post(this.serverUrl+"/admin", JSON.stringify(this.user), this.httpOptions).subscribe(
       (response) => {
-        console.log(response)
-        localStorage.setItem("appToken", JSON.stringify(response));
+        // console.log(response)
+        // localStorage.setItem("appToken", JSON.stringify(response));
       },
       (error) => {
         localStorage.removeItem("appToken");
+        this.router.navigate(['/login']);
       }
     )
   }

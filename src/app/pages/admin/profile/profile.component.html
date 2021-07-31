@@ -1,74 +1,87 @@
-<div class="m-3">
-    <p-card>
-        <div class="p-d-flex  p-flex-row-reverse">
-            <p-button label="Edit" icon="pi pi-pencil" styleClass="p-button-sm p-button-success ml-2 mb-1" (click)="showDialog()"></p-button>
-            <p-toggleButton onLabel="On Logo" offLabel="Off Logo" 
-            onIcon="pi pi-check" offIcon="pi pi-times" iconPos="right" (click)="clickIsLogo()" styleClass="p-button-sm" [(ngModel)]="checked"></p-toggleButton>
-        </div>
-        <table class="table">
-          
-            <tbody>
-              <tr>
-                <th style="min-width: 200px;" scope="row">Logo</th>
-                <td><img [src]="baseUrl + profile.imageLogo" [alt]="profile.image" height="100" class="p-shadow-4" /></td>
-              </tr>
-              <tr>
-                <th scope="row">Pendaftaran</th>
-                <td><a pButton pRipple type="button" label="Klik untuk lihat" class="p-button-raised p-button-secondary p-button-text" [href]="baseUrl + profile.registration"  ></a></td>
-              </tr>
-              <tr>
-                <th scope="row">Judul Artikel</th>
-                <td>{{profile.titleHistory}}</td>
-              </tr>
-              <tr>
-                <th scope="row">Gambar Artikel</th>
-                <td>
-                    <img [src]="baseUrl + profile.imageHistory" [alt]="profile.image" height="100" class="p-shadow-4" /></td>
-              </tr>
-              <tr>
-                <th scope="row">Konten Artikel</th>
-                <td>
-                    <div style="line-height: 25px;" [innerHTML]="profile.contentHistory | safeHtml"></div>
-                </td>
-              </tr>
+<div *ngIf="!isLoading; else other">
+  <div class="m-3">
+      <p-card>
+          <div class="p-d-flex  p-flex-row-reverse">
+              <p-button label="Edit" icon="pi pi-pencil" styleClass="p-button-sm p-button-success ml-2 mb-1" (click)="showDialog()"></p-button>
+              <p-toggleButton onLabel="On Logo" offLabel="Off Logo" 
+              onIcon="pi pi-check" offIcon="pi pi-times" iconPos="right" (click)="clickIsLogo()" styleClass="p-button-sm" [(ngModel)]="checked"></p-toggleButton>
+          </div>
+          <table class="table">
             
-            </tbody>
-          </table>
-
-
-          <!-- start dialog -->
-    <p-dialog header="Title" [(visible)]="display" *ngIf="display" [style]="{'width':'800px'}">
-        <div *ngIf="profile">
+              <tbody>
+                <tr>
+                  <th style="min-width: 200px;" scope="row">Logo</th>
+                  <td><img [src]="baseUrl + profile.imageLogo" [alt]="profile.image" height="100" class="p-shadow-4" /></td>
+                </tr>
+                <tr>
+                  <th scope="row">Pendaftaran</th>
+                  <td><a pButton pRipple type="button" label="Klik untuk lihat" class="p-button-raised p-button-secondary p-button-text" [href]="baseUrl + profile.registration"  ></a></td>
+                </tr>
+                <tr>
+                  <th scope="row">Judul Artikel</th>
+                  <td>{{profile.titleHistory}}</td>
+                </tr>
+                <tr>
+                  <th scope="row">Gambar Artikel</th>
+                  <td>
+                      <img [src]="baseUrl + profile.imageHistory" [alt]="profile.image" height="100" class="p-shadow-4" /></td>
+                </tr>
+                <tr>
+                  <th scope="row">Konten Artikel</th>
+                  <td>
+                      <div style="line-height: 25px;" [innerHTML]="profile.contentHistory | safeHtml"></div>
+                  </td>
+                </tr>
+              
+              </tbody>
+            </table>
+  
+  
+            <!-- start dialog -->
+      <p-dialog header="Title" [(visible)]="display" *ngIf="display" [style]="{'width':'800px'}">
+          <div *ngIf="profile">
+              
+                  <div class="p-fluid">
+                      <div class="p-field">
+                          <label for="logo">Logo</label>
+                          <p-fileUpload name="myfile[]" customUpload="true"  (uploadHandler)="onUploadLogo($event)"></p-fileUpload>
+                      </div>
+                      <div class="p-field">
+                          <label for="pendaftaran">Pendaftaran</label>
+                          <p-fileUpload name="myfile[]" customUpload="true" (uploadHandler)="onUploadRegistration($event)"></p-fileUpload>
+                      </div>
+                      <div class="p-field">
+                          <label for="lastname1">Judul Profile</label>
+                          <input id="lastname1" type="text" [(ngModel)]="profile.titleHistory" pInputText> 
+                      </div>
+                      <div class="p-field">
+                          <label for="pendaftaran">Gambar Profile</label>
+                          <p-fileUpload name="myfile[]" customUpload="true" (uploadHandler)="onUploadProfile($event)"></p-fileUpload>
+                      </div>
+                      <div class="p-field">
+                          <label for="lastname1">Konten Profile</label>
+                          <p-editor [(ngModel)]="profile.contentHistory" [style]="{'height':'320px'}"></p-editor>
+                      </div>
+                      <input type="hidden" [(ngModel)]="profile.id">
+                  </div>
+                  <button pButton type="button" label="Success" class="p-button-success" icon="pi pi-check" iconPos="left" (click)="onSave()"></button>
             
-                <div class="p-fluid">
-                    <div class="p-field">
-                        <label for="logo">Logo</label>
-                        <p-fileUpload name="myfile[]" customUpload="true"  (uploadHandler)="onUploadLogo($event)"></p-fileUpload>
-                    </div>
-                    <div class="p-field">
-                        <label for="pendaftaran">Pendaftaran</label>
-                        <p-fileUpload name="myfile[]" customUpload="true" (uploadHandler)="onUploadRegistration($event)"></p-fileUpload>
-                    </div>
-                    <div class="p-field">
-                        <label for="lastname1">Judul Profile</label>
-                        <input id="lastname1" type="text" [(ngModel)]="profile.titleHistory" pInputText> 
-                    </div>
-                    <div class="p-field">
-                        <label for="pendaftaran">Gambar Profile</label>
-                        <p-fileUpload name="myfile[]" customUpload="true" (uploadHandler)="onUploadProfile($event)"></p-fileUpload>
-                    </div>
-                    <div class="p-field">
-                        <label for="lastname1">Konten Profile</label>
-                        <p-editor [(ngModel)]="profile.contentHistory" [style]="{'height':'320px'}"></p-editor>
-                    </div>
-                    <input type="hidden" [(ngModel)]="profile.id">
-                </div>
-                <button pButton type="button" label="Success" class="p-button-success" icon="pi pi-check" iconPos="left" (click)="onSave()"></button>
-          
-        </div>
-    </p-dialog>
-
-    <!-- toast message -->
-    <p-toast></p-toast>
-    </p-card>
+          </div>
+      </p-dialog>
+  
+      <!-- toast message -->
+      <p-toast></p-toast>
+      </p-card>
+  </div>
 </div>
+
+<ng-template #other>
+  <div class="d-flex justify-content-center align-items-center" style="min-height: 100vh;">
+    <div class=" d-inline-block">
+        <p-progressSpinner ></p-progressSpinner>
+        
+    </div>
+</div>
+</ng-template>
+
+

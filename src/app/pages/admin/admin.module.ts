@@ -30,8 +30,9 @@ import {CascadeSelectModule} from 'primeng/cascadeselect';
 import {DropdownModule} from 'primeng/dropdown';
 import {EditorModule} from 'primeng/editor';
 import {ToggleButtonModule} from 'primeng/togglebutton';
-import { AppModule } from 'src/app/app.module';
 import { ExternalModule } from 'src/app/external/external.module';
+
+import {ProgressSpinnerModule} from 'primeng/progressspinner';
 
 const routes : Routes =[
   {
@@ -101,7 +102,8 @@ const routes : Routes =[
     EditorModule,
     ToggleButtonModule,
     ChartModule,
-    ExternalModule
+    ExternalModule,
+    ProgressSpinnerModule
   ],
   
 })
