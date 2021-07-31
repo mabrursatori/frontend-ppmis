@@ -44,6 +44,7 @@ breadcrumb: string;
         //console.log(response)
         this.data = response;
         this.footer = this.data.contacts
+        console.log(response)
       },
       error => {
         this.router.navigate(["/error"])

@@ -4,19 +4,19 @@
             <p-table [value]="contacts">
                 <ng-template pTemplate="header">
                     <tr>
-                        <th>Id</th>
+                        <th style="width: 20px;">Id</th>
                         <th>Name</th>
                         <th>Label</th>
-                        <th>Url</th>
-                        <th>Action</th>
+                        <th style="width: 400px;">Url</th>
+                        <th >Action</th>
                     </tr>
                 </ng-template>
                 <ng-template pTemplate="body" let-contact>
                     <tr>
-                        <td>{{contact.id}}</td>
+                        <td >{{contact.id}}</td>
                         <td>{{contact.name}}</td>
                         <td>{{contact.label}}</td>
-                        <td>{{contact.url}}</td>
+                        <td style="word-wrap: break-word;">{{contact.url}}</td>
                         <td>
                             <button pButton pRipple type="button" icon="pi pi-pencil" class="p-button-rounded p-button-success mr-1" (click)= "showDialog(contact)"></button>
                         </td>

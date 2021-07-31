@@ -53,7 +53,9 @@ export class HomeComponent implements OnInit {
 
   ngOnInit(): void {
     this.getScreenSize();
-    this.get();
+    this.get()
+    setTimeout(()=>{  console.log('TEST') }, 10000)
+   
   }
 
 

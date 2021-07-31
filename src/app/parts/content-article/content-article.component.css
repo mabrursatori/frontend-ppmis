@@ -4,6 +4,6 @@
 
 .img-content{
     width: 100% !important; 
-    height: 400px !important; 
     border-radius: 20px !important;
+    object-fit: cover !important;
 }
