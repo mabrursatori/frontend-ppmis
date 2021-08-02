@@ -15,10 +15,10 @@ export class LoginComponent implements OnInit {
   user : any;
   isLoading: boolean = false;
 
-  constructor(public apiService : ApiService, 
+  constructor(public apiService : ApiService,
     private router: Router,
     private messageService: MessageService) {
-      
+
      }
 
   ngOnInit(): void {
@@ -27,7 +27,7 @@ export class LoginComponent implements OnInit {
       password : "",
       token : ""
     }
-    
+
   }
 
   login(){
@@ -44,6 +44,7 @@ export class LoginComponent implements OnInit {
       (error) => {
         console.log(error)
         this.messageService.add({severity:'error', summary:'Error!', detail:'Username atau Password Anda Salah!'});
+        this.isLoading = false;
       }
         )
   }
