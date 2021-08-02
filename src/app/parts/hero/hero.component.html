@@ -11,7 +11,7 @@
             <h4 class="title-history h3"> {{data.titleHistory}} </h4>
           </a>
           <div>
-            <span [innerHTML]="data.contentHistory | safeHtml: 130"></span>
+            <span [innerHTML]="data.contentHistory | safeHtml: 1000"></span>
             <a [href]="'/article/history'" style="color: #000748;"> Baca Selengkapnya...</a>
           </div>
         </div>

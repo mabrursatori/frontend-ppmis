@@ -14,11 +14,11 @@ constructor(private sanitized: DomSanitizer){
     if (regex > 0){
       let str = value.replace(/<\/?[^>]+(>|$)/g, "").trim()
       let arr = []
-      str = str.split(" ")
+      str = [...str];
       for(let i = 0; i < regex; i++){
         arr.push(str[i])
       }
-      return arr.join(" ")
+      return arr.join("")
     }
     return this.sanitized.bypassSecurityTrustHtml(value);
   }

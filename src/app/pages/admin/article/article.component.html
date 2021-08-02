@@ -1,9 +1,9 @@
 <div *ngIf="!isLoading;else other">
     <div class="m-3">
         <p-card>
-           
+
               <!-- START TABLE -->
-              <p-table styleClass="p-datatable-sm" #dt1 [value]="articles" dataKey="id" [loading]="loading"  [paginator]="true" [rows]="5" [showCurrentPageReport]="true" 
+              <p-table styleClass="p-datatable-sm" #dt1 [value]="articles" dataKey="id" [loading]="loading"  [paginator]="true" [rows]="5" [showCurrentPageReport]="true"
               currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" [rowsPerPageOptions]="[5, 10,25,50]"
               [globalFilterFields]="['title', 'type']">
               <ng-template pTemplate="caption">
@@ -41,22 +41,22 @@
                       </tr>
                   </ng-template>
                   <ng-template pTemplate="paginatorleft">
-                      
+
                   </ng-template>
                   <ng-template pTemplate="paginatorright">
                       <p-button type="button" icon="pi pi-cloud" styleClass="p-button-text"></p-button>
                   </ng-template>
               </p-table>
-    
-    
+
+
               <!-- start dialog -->
         <p-dialog header="Article" [(visible)]="display" *ngIf="display" [style]="{'width':'800px'}">
             <div [hidden]="hiddenForm" *ngIf="selectedItem">
-                        
+
                     <div class="p-fluid">
                         <div class="p-field">
                             <label for="title">Title</label>
-                            <input id="title" type="text" [(ngModel)] = "selectedItem.title" pInputText> 
+                            <input id="title" type="text" [(ngModel)] = "selectedItem.title" pInputText>
                         </div>
                         <div class="p-field">
                             <label for="image">Image</label>
@@ -64,11 +64,11 @@
                         </div>
                         <div class="p-field">
                             <label for="caption">Caption</label>
-                            <input id="caption" type="text" [(ngModel)] = "selectedItem.caption" pInputText> 
+                            <input id="caption" type="text" [(ngModel)] = "selectedItem.caption" pInputText>
                         </div>
                         <div class="p-field">
-                            
-                            <p-dropdown [options]="type" [(ngModel)]="selectedType" optionLabel="name"> 
+
+                            <p-dropdown [options]="type" [(ngModel)]="selectedType" optionLabel="name">
                             </p-dropdown>
                         </div>
                         <div class="p-field">
@@ -78,11 +78,16 @@
                         <input type="hidden" [(ngModel)]="selectedItem.image">
                         <input type="hidden" [(ngModel)]="selectedItem.id">
                     </div>
-                    <button pButton type="button" label="Success" class="p-button-success" icon="pi pi-check" iconPos="left" (click)="onClick(param)"></button>
-              
+                    <button *ngIf="!isLoadingSave;else otherSave" pButton type="button" label="Success" class="p-button-success" icon="pi pi-check" [disabled]="isDisabled" iconPos="left" (click)="onClick(param)"></button>
+                    <ng-template #otherSave>
+                      <p-progressSpinner [style]="{width: '40px', height: '40px'}"></p-progressSpinner>
+                    </ng-template>
+
+
+
             </div>
             <div [hidden]="!hiddenForm">
-                
+
                 <h1>{{selectedItem.title}}</h1>
                 <img [src]="baseUrl + selectedItem.image" [alt]="selectedItem.image" [style]="{'width':'100%'}" class="p-shadow-4 mb-1" />
                 <p [style]="{'font-size': '12px', 'color' : 'gray'}">{{selectedItem.caption}}</p>
@@ -91,10 +96,10 @@
         </p-dialog>
         </p-card>
     </div>
-    
+
     <!-- toast message -->
     <p-toast></p-toast>
-    
+
     <!-- toast confirm -->
     <p-toast position="center" key="c" [baseZIndex]="5000">
         <ng-template let-message pTemplate="message">
@@ -104,7 +109,7 @@
                     <h4>{{message.summary}}</h4>
                     <p>{{message.detail}}</p>
                 </div>
-                <div class="p-grid p-fluid">
+                <div *ngIf="!isLoadingSave;else otherDelete" class="p-grid p-fluid">
                     <div class="p-col-6">
                         <button type="button" pButton (click)="onConfirm()" label="Ya" class="p-button-success"></button>
                     </div>
@@ -112,6 +117,13 @@
                         <button type="button" pButton (click)="onReject()" label="Tidak" class="p-button-secondary"></button>
                     </div>
                 </div>
+                <ng-template #otherDelete>
+                  <div style="width: 100%;">
+                    <div class="d-flex justify-content-center">
+                      <p-progressSpinner [style]="{width: '30px', height: '30px'}"></p-progressSpinner>
+                    </div>
+                  </div>
+                </ng-template>
             </div>
         </ng-template>
     </p-toast>
@@ -121,7 +133,7 @@
     <div class="d-flex justify-content-center align-items-center" style="min-height: 100vh;">
         <div class=" d-inline-block">
             <p-progressSpinner ></p-progressSpinner>
-            
+
         </div>
     </div>
 </ng-template>

@@ -18,6 +18,7 @@ baseUrl : string;
 selectedItem: any;
 selectedType: any;
 isLoading: boolean = false;
+isLoadingSave: boolean = false;
 type: any[];
 editDropdown: boolean = true;
 param: string;
@@ -65,6 +66,7 @@ data: any = {
   }
 
   onClick(param: string){
+    this.isLoadingSave = true;
     if(param == "add"){
       this.add();
     }else if(param == "update"){
@@ -80,6 +82,7 @@ data: any = {
   }
 
   onConfirm(){
+    this.isLoadingSave = true;
     this.delete()
   }
   onReject(){
@@ -106,12 +109,13 @@ data: any = {
     this.apiService.post("/article", this.data, true).subscribe(
       (response) => {
         this.messageService.add({severity:'success', summary:'Sucessfull!', detail:'Berhasil Menyimpan Data Baru!'});
-        this.get();
+        this.isLoadingSave = false;
         this.display = false;
       },
       (error) => {
         this.messageService.add({severity:'error', summary:'Error!', detail:'Gagal Menyimpan Data!'});
-      } 
+        this.isLoadingSave = false;
+      }
     )
   }
 
@@ -126,11 +130,12 @@ data: any = {
     this.apiService.put(`/article/${this.data.id}`, this.data, true).subscribe(
       response => {
         this.messageService.add({severity:'success', summary:'Sucessfull!', detail:'Berhasil Merubah Data!'});
-        this.get();
+        this.isLoadingSave = false;
         this.display = false;
       },
       error => {
         this.messageService.add({severity:'error', summary:'Error!', detail:'Gagal Merubah Data!'});
+        this.isLoadingSave = false;
         console.log(error)
       }
     )
@@ -140,13 +145,16 @@ data: any = {
     this.apiService.delete(`/article/${this.data.id}`).subscribe(
       (response) => {
        // console.log(response);
+
         this.messageService.clear();
         this.messageService.add({severity:'success', summary:'Sucessfull!', detail:'Berhasil Menghapus Data!'});
-       this.get();
+        this.isLoadingSave = false;
+      // this.get();
       },
       (error) => {
         console.log(error);
         this.messageService.add({severity:'error', summary:'Error!', detail:'Gagal Menghapus Data!'});
+        this.isLoadingSave = false;
       }
     )
   }
@@ -154,7 +162,7 @@ data: any = {
   onUpload(event) {
     for(let file of event.files) {
        this.data.image = file;
-      // console.log(file);
+       console.log(file.size);
     }
   }
 
