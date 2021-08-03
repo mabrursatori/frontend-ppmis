@@ -1,4 +1,4 @@
 {
-    "BaseUrl": "http://localhost:3000",
-    "Url" : "https://server-ppmis.herokuapp.com"
+    "Url": "http://localhost:3000",
+    "BaseUrl" : "https://server-ppmis.herokuapp.com"
 }
