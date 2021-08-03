@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import { ApiService } from 'src/app/service/api.service';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-list-article',
@@ -19,17 +20,20 @@ data: any;
   constructor(
     private route: ActivatedRoute,
     private apiService: ApiService,
-    private router: Router
+    private router: Router,
+    private titleService: Title
   ) { }
 
   ngOnInit(): void {
     this.type = this.route.snapshot.params['type']
     this.keyword = this.route.snapshot.params['keyword']
-    
+
     if(this.type == "search"){
+      this.titleService.setTitle("Pencarian")
       this.breadcrumb = "Pencarian"
       this.get(`/home/search/${this.keyword}`)
     }else{
+      this.titleService.setTitle("Kategori")
       this.breadcrumb = this.capitalizeFirstLetter(this.type);
       this.get(`/home/type/${this.type}`)
       this.type = this.capitalizeFirstLetter(this.type)
@@ -39,7 +43,7 @@ data: any;
   capitalizeFirstLetter(string) {
     return string.charAt(0).toUpperCase() + string.slice(1);
   }
-  
+
   get(url){
     this.apiService.get(url).subscribe(
       response => {

@@ -3,6 +3,7 @@ import {ActivatedRoute} from '@angular/router';
 import { RouterModule, Routes, Router } from '@angular/router';
 import { MessageService } from 'primeng/api';
 import { ApiService } from 'src/app/service/api.service';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-dashboard',
@@ -22,9 +23,11 @@ export class DashboardComponent implements OnInit {
     event: null,
     bathsul: null
   }
-  constructor(private apiService: ApiService) { }
+  constructor(private apiService: ApiService,
+    private titleService: Title) { }
 
   ngOnInit(): void {
+    this.titleService.setTitle("Admin - Dashboard")
     this.apiService.getWithToken("/dashboard").subscribe(
       response => {
         //console.log(response)
@@ -45,16 +48,16 @@ export class DashboardComponent implements OnInit {
                       "#36A2EB",
                       "#FFCE56"
                   ]
-              }]    
+              }]
           };
       },
       error => {
         console.log(error)
       }
     )
-      
 
-    
+
+
   }
 
 }

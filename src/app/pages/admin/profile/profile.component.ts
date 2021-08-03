@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ApiService } from 'src/app/service/api.service';
 import { MessageService } from 'primeng/api';
 import * as config from "../../../../json/config.json"
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-profile',
@@ -10,7 +11,7 @@ import * as config from "../../../../json/config.json"
   providers: [MessageService]
 })
 export class ProfileComponent implements OnInit {
-  
+
   isLoading: boolean = false;
 profile: any = {
   imageLogo: null,
@@ -36,14 +37,16 @@ data: any ={
 }
 
   constructor(private apiService: ApiService,
-    private messageService: MessageService) { }
+    private messageService: MessageService,
+    private titleService: Title) { }
 
   ngOnInit(): void {
+    this.titleService.setTitle("Admin - Profile")
     this.baseUrl = config.BaseUrl + "/";
     this.get()
 
     this.display = false;
-   
+
   }
 
   onUploadLogo(event){
@@ -117,6 +120,6 @@ this.update();
     this.update();
   }
 
- 
+
 
 }

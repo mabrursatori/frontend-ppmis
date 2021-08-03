@@ -3,6 +3,7 @@ import { ApiService } from 'src/app/service/api.service';
 import {User} from '../../models/user'
 import { Router } from '@angular/router';
 import { MessageService } from 'primeng/api';
+import { Title } from '@angular/platform-browser';
 
 
 @Component({
@@ -17,11 +18,13 @@ export class LoginComponent implements OnInit {
 
   constructor(public apiService : ApiService,
     private router: Router,
-    private messageService: MessageService) {
+    private messageService: MessageService,
+    private titleService: Title) {
 
      }
 
   ngOnInit(): void {
+    this.titleService.setTitle("PP.MIS - Login")
     this.user = {
       username : "",
       password : "",

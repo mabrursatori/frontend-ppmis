@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ApiService } from 'src/app/service/api.service';
 import { MessageService } from 'primeng/api';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-contact',
@@ -13,9 +14,11 @@ export class ContactComponent implements OnInit {
   isLoading: boolean = false;
 
   constructor(private apiService: ApiService,
-    private messageService: MessageService) { }
+    private messageService: MessageService,
+    private titleService: Title) { }
 
   ngOnInit(): void {
+    this.titleService.setTitle("Media Social")
     this.get();
   }
 

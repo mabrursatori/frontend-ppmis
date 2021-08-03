@@ -3,7 +3,7 @@ import { ApiService } from 'src/app/service/api.service';
 import { MessageService } from 'primeng/api';
 import {Article} from '../../../models/article'
 import * as config from "../../../../json/config.json"
-
+import { Title } from '@angular/platform-browser';
 
 
 @Component({
@@ -32,11 +32,12 @@ data: any = {
   oldImage: null
 }
   constructor(private apiService: ApiService,
-    private messageService: MessageService) { }
+    private messageService: MessageService,
+    private titleService:Title) { }
 
   ngOnInit(): void {
     this.baseUrl = config.BaseUrl + "/";
-
+    this.titleService.setTitle("Admin - Artikel")
       //table
       this.loading = false;
       this.displayBasic = false;

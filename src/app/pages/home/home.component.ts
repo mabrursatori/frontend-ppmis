@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { HostListener } from "@angular/core";
 import { ApiService } from 'src/app/service/api.service';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-home',
@@ -45,17 +46,19 @@ export class HomeComponent implements OnInit {
 
   profile: any;
   footer: any;
-  
+
 
   constructor(
-    private apiService: ApiService
+    private apiService: ApiService,
+    private titleService: Title
   ) { }
 
   ngOnInit(): void {
+    this.titleService.setTitle("PP.MIS - Beranda")
     this.getScreenSize();
     this.get()
     setTimeout(()=>{  console.log('TEST') }, 10000)
-   
+
   }
 
 
@@ -102,5 +105,5 @@ export class HomeComponent implements OnInit {
     }
 
 
-    
+
 }

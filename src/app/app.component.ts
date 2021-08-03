@@ -14,20 +14,20 @@ import AOS from 'aos';
   styleUrls: ['./app.component.css'],
 })
 export class AppComponent {
-  
+
   constructor(private apiService :ApiService){
-    
+
   }
 
   ngOnInit(): void {
-    
+
    AOS.init();
 
-    
-    
+
+
   }
 
-  
 
-  
+
+
 }

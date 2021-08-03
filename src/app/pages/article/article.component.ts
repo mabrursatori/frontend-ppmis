@@ -2,7 +2,7 @@ import { ThisReceiver } from '@angular/compiler';
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import { ApiService } from 'src/app/service/api.service';
-
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-article',
@@ -22,7 +22,8 @@ breadcrumb: string;
   constructor(
     private route: ActivatedRoute,
     private apiService: ApiService,
-    private router: Router
+    private router: Router,
+    private titleService: Title
   ) { }
 
   ngOnInit(): void {
@@ -31,7 +32,7 @@ breadcrumb: string;
     this.breadcrumb = "History"
       this.getHistory();
     }else{
-      
+
     this.breadcrumb = "Artikel"
       this.getArticle()
     }
@@ -39,6 +40,7 @@ breadcrumb: string;
   }
 
   getArticle(){
+    this.titleService.setTitle("PP.MIS - Artikel")
     this.apiService.get(`/home/${this.id}`).subscribe(
       response => {
         //console.log(response)
@@ -53,9 +55,11 @@ breadcrumb: string;
   }
 
   getHistory(){
+    this.titleService.setTitle("PP.MIS - Sejarah")
     this.apiService.get("/history").subscribe(
       response => {
         this.data = response;
+        console.log(response)
         this.footer = this.data.contacts;
         this.history = true;
       },
