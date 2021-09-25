@@ -5,6 +5,7 @@ import { RouterModule, Routes, Router } from '@angular/router';
 import { ApiService } from 'src/app/service/api.service';
 import { MessageService } from 'primeng/api';
 import { HostListener } from '@angular/core';
+import { User } from 'src/app/models/user';
 
 @Component({
   selector: 'app-admin',
@@ -18,12 +19,20 @@ export class AdminComponent implements OnInit {
   width = "10px";
   showFiller = false;
   products: any;
+  isAdmin: boolean;
+  user: User;
   constructor(private apiService: ApiService,
     private messageService: MessageService,
     private router: Router) { }
 
   ngOnInit(): void {
    this.apiService.setLogin();
+
+   const str = localStorage.getItem('appToken');
+    if(str != null){
+      this.user = JSON.parse(str);
+      this.isAdmin = this.user.role == "ADMIN";
+    }
   }
 
 
@@ -50,9 +59,9 @@ export class AdminComponent implements OnInit {
           //console.log(this.scrWidth);
 
             if(this.scrWidth < 900){
-              this.router.navigate(["/error"]);
+            //  this.router.navigate(["/error"]);
             }
     }
-  
+
 
 }

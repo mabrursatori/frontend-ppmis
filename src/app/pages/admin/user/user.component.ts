@@ -50,21 +50,25 @@ export class UserComponent implements OnInit {
 add(){
   this.data.username = this.selectedUser.username;
   this.data.password = this.selectedUser.password;
+  this.isLoading = true;
   this.apiService.post('/users', this.data).subscribe(
     response => {
       //console.log(response);
       this.messageService.add({severity:'success', summary:'Sucessfull!', detail:'Berhasil Menyimpan Data Baru!'});
       this.get();
       this.display = false;
+      this.isLoading = false;
     },
     error => {
       console.log(error);
       this.messageService.add({severity:'error', summary:'Error!', detail:'Gagal Menyimpan Data!'});
+      this.isLoading = false;
     }
   )
 }
 
 edit(){
+  this.isLoading = true;
   this.data.id = this.selectedUser.id;
   this.data.username = this.selectedUser.username;
   this.data.password = this.selectedUser.password;
@@ -74,26 +78,31 @@ edit(){
       //console.log(response);
       this.messageService.add({severity:'success', summary:'Sucessfull!', detail:'Berhasil Merubah Data!'});
       this.display = false;
+      this.isLoading = false;
       this.get();
     },
     error => {
       console.log(error);
       this.messageService.add({severity:'error', summary:'Error!', detail:'Gagal Menyimpan Data!'});
+      this.isLoading = false;
     }
   )
 }
 
 delete(){
+  this.isLoading = true;
   this.apiService.delete(`/users/${this.selectedUser.id}`).subscribe(
     (response) => {
       //console.log(response);
       this.messageService.clear();
       this.messageService.add({severity:'success', summary:'Sucessfull!', detail:'Berhasil Menghapus Data!'});
-     this.get();
+      this.isLoading = false;
+      this.get();
     },
     (error) => {
       console.log(error);
       this.messageService.add({severity:'error', summary:'Error!', detail:'Gagal Menghapus Data!'});
+      this.isLoading = false;
     }
   )
 }
@@ -197,7 +206,7 @@ reset() {
 isLastPage(): boolean {
   return this.images ? this.first === (this.images.length - this.rows): true;
 }
-isFirstPage(): boolean {      
+isFirstPage(): boolean {
   return this.images ? this.first === 0 : true;
 }
 }

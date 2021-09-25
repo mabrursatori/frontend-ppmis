@@ -2,7 +2,7 @@
     <div class="m-3">
         <p-card>
             <!-- START TABLE -->
-            <p-table styleClass="p-datatable-sm" #dt1 [value]="someSlideshow" dataKey="id" [loading]="loading"  [paginator]="true" [rows]="5" [showCurrentPageReport]="true" 
+            <p-table styleClass="p-datatable-sm" #dt1 [value]="someSlideshow" dataKey="id" [loading]="loading"  [paginator]="true" [rows]="5" [showCurrentPageReport]="true"
             currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" [rowsPerPageOptions]="[5, 10,25,50]"
             [globalFilterFields]="['number']">
             <ng-template pTemplate="caption">
@@ -25,7 +25,7 @@
                 </ng-template>
                 <ng-template pTemplate="body" let-item>
                     <tr>
-                        <td>{{number }}</td>
+                        <td>{{item.order }}</td>
                         <td><img [src]="baseUrl + item.image" [alt]="item.image" height="100" class="p-shadow-4" /></td>
                         <td>{{item.number}}</td>
                         <td>
@@ -36,7 +36,7 @@
                     </tr>
                 </ng-template>
                 <ng-template pTemplate="paginatorleft">
-                    
+
                 </ng-template>
                 <ng-template pTemplate="paginatorright">
                     <p-button type="button" icon="pi pi-cloud" styleClass="p-button-text"></p-button>
@@ -44,7 +44,7 @@
             </p-table>
             <!-- gallerie -->
             <p-galleria class="test" [(value)]="someSlideshow" [(visible)]="displayBasic" [(activeIndex)]="activeIndex" [responsiveOptions]="responsiveOptions" [containerStyle]="{'max-width': '850px'}" [numVisible]="7"
-            [circular]="true" [fullScreen]="true" [showItemNavigators]="true" [showThumbnails]="false" [baseZIndex]="100000" [ngStyle]="{'width': width}"> 
+            [circular]="true" [fullScreen]="true" [showItemNavigators]="true" [showThumbnails]="false" [baseZIndex]="100000" [ngStyle]="{'width': width}">
             <ng-template pTemplate="item" let-image>
                 <img [src]="baseUrl + image.image" style="height: 500px; display: block;"/>
             </ng-template>
@@ -55,11 +55,11 @@
             </ng-template>
         </p-galleria>
         <!-- end gallerie -->
-    
+
         <!-- start dialog -->
         <p-dialog header="Title" [(visible)]="display" *ngIf="display">
             <div *ngIf="selectedImage">
-                
+
                     <div class="p-fluid">
                         <div class="p-field">
                             <label for="image">Image</label>
@@ -67,21 +67,20 @@
                         </div>
                         <div class="p-field">
                             <label for="lastname1">Number</label>
-                            <input id="lastname1" type="text" [(ngModel)] = "selectedImage.number" pInputText> 
+                            <input id="lastname1" type="text" [(ngModel)] = "selectedImage.number" pInputText>
                         </div>
                         <input type="hidden" [(ngModel)]="selectedImage.image">
                         <input type="hidden" [(ngModel)]="selectedImage.id">
                     </div>
                     <button pButton type="button" label="Success" class="p-button-success" icon="pi pi-check" iconPos="left" (click)="onClick(param)"></button>
-              
+
             </div>
         </p-dialog>
         </p-card>
         <!-- end dialog -->
-    
-        <!-- toast message -->
-        <p-toast></p-toast>
-    
+
+
+
         <!-- toast confirm -->
         <p-toast position="center" key="c" [baseZIndex]="5000">
             <ng-template let-message pTemplate="message">
@@ -109,13 +108,14 @@
     <div class="d-flex justify-content-center align-items-center" style="min-height: 100vh;">
         <div class=" d-inline-block">
             <p-progressSpinner ></p-progressSpinner>
-            
+
         </div>
     </div>
 </ng-template>
 
 
-
+<!-- toast message -->
+<p-toast></p-toast>
 
 
 

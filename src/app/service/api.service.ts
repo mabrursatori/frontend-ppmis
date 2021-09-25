@@ -75,10 +75,10 @@ export class ApiService {
     return this.http.delete(this.serverUrl + url, this.httpOptions);
   }
 
-  
-  
 
-  
+
+
+
 user: User;
   httpOptions: any;
   getToken(){
@@ -90,7 +90,7 @@ user: User;
       'Authorization': 'Bearer '+ this.user.token
       })
      }
-    
+
   }
 }
 }

@@ -51,25 +51,47 @@ data: any ={
 
   onUploadLogo(event){
     for(let file of event.files) {
+
+      if(file.size > 1000000){
+        this.messageService.add({severity:'error', summary:'Error!', detail:'Gagal Menyimpan! File Melebihi 1MB'});
+        return;
+      }else if(file.type.split('/')[0] != 'image'){
+        this.messageService.add({severity:'error', summary:'Error!', detail:'Gagal Menyimpan! File Harus Berupa Gambar'});
+        return;
+      }
       this.data.imageLogo = file;
-      //console.log(file);
+      this.messageService.add({severity:'success', summary:'Sucessfull!', detail:'Berhasil Manambah Data!'});
    }
   }
   onUploadRegistration(event){
     for(let file of event.files) {
+      if(file.size > 1000000){
+        this.messageService.add({severity:'error', summary:'Error!', detail:'Gagal Menyimpan! File Melebihi 1MB'});
+        return;
+      }else if(file.type.split('/')[1] != 'pdf'){
+        this.messageService.add({severity:'error', summary:'Error!', detail:'Gagal Menyimpan! File Harus Berupa PDF'});
+        return;
+      }
       this.data.registration = file;
-      //console.log(file);
+      this.messageService.add({severity:'success', summary:'Sucessfull!', detail:'Berhasil Manambah Data!'});
    }
   }
   onUploadProfile(event){
     for(let file of event.files) {
+      if(file.size > 1000000){
+        this.messageService.add({severity:'error', summary:'Error!', detail:'Gagal Menyimpan! File Melebihi 1MB'});
+        return;
+      }else if(file.type.split('/')[0] != 'image'){
+        this.messageService.add({severity:'error', summary:'Error!', detail:'Gagal Menyimpan! File Harus Berupa Gambar'});
+        return;
+      }
       this.data.imageHistory = file;
-      console.log(file);
+      this.messageService.add({severity:'success', summary:'Sucessfull!', detail:'Berhasil Manambah Data!'});
    }
   }
 
   get(){
-    this.isLoading = true;
+
     this.apiService.getWithToken("/profile").subscribe(
       (response) => {
         //console.log(response)
@@ -84,6 +106,7 @@ data: any ={
   }
 
   update(){
+    this.isLoading = true;
     this.data.id = this.profile.id;
     this.data.titleHistory = this.profile.titleHistory;
     this.data.contentHistory = this.profile.contentHistory;
@@ -96,11 +119,12 @@ data: any ={
         console.log(response);
         this.messageService.add({severity:'success', summary:'Sucessfull!', detail:'Berhasil Merubah Data!'});
         this.display = false;
-        this.get();
+        this.isLoading = false;
       },
       (error) => {
         console.log(error);
         this.messageService.add({severity:'error', summary:'Error!', detail:'Gagal Menyimpan Data!'});
+        this.isLoading = false;
       }
     )
   }

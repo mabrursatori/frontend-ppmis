@@ -7,10 +7,11 @@
       <span>Admin PP.MIS</span>
     </a>
     <span class="example-spacer"></span>
-    <button mat-icon-button (click)="showConfirm()" class="example-icon favorite-icon ml-auto mr-1" aria-label="Example icon-button with heart icon">
+    <h2 class="ml-auto">{{ user.username }}</h2>
+    <button mat-icon-button (click)="showConfirm()" class="example-icon favorite-icon mr-1" aria-label="Example icon-button with heart icon">
       <mat-icon>logout</mat-icon>
     </button>
- 
+
   </mat-toolbar>
   <mat-drawer-container class="container-sidenav" autosize>
     <mat-drawer class="sidenav" #drawer mode="side" opened>
@@ -36,20 +37,20 @@
           <mat-icon matListIcon>description</mat-icon>
           <h3 matLine>Article</h3>
         </mat-list-item>
-        <mat-list-item routerLink="/admin/user">
+        <mat-list-item *ngIf="isAdmin" routerLink="/admin/user">
           <mat-icon matListIcon>account_circle</mat-icon>
           <h3 matLine>User</h3>
         </mat-list-item>
 
       </mat-nav-list>
-      
+
     </mat-drawer>
     <mat-drawer-content class="sidenav-content">
       <router-outlet ></router-outlet>
     </mat-drawer-content>
   </mat-drawer-container>
 
-   
+
 
   <!-- toast confirm -->
   <p-toast position="center" key="c" [baseZIndex]="5000">
@@ -72,4 +73,3 @@
     </ng-template>
 </p-toast>
 
-  

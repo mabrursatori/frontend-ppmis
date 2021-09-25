@@ -51,16 +51,12 @@ export class HomeComponent implements OnInit {
   constructor(
     private apiService: ApiService,
     private titleService: Title,
-    private meta: Meta
   ) { }
 
   ngOnInit(): void {
     this.titleService.setTitle("PP.MIS - Beranda")
-    this.meta.addTag({ name: 'title', content: 'PP.MIS' })
-    this.meta.addTag({ name: 'description', content: 'Pondok Pesantren Mahadul Ilmi Asy-Syarie Sarang Rembang' })
     this.getScreenSize();
     this.get()
-    setTimeout(()=>{  console.log('TEST') }, 10000)
 
   }
 

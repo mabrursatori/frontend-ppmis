@@ -96,6 +96,7 @@ data: any = {
       (response) => {
         this.articles = response;
         this.isLoading = false;
+        console.log(this.articles)
       },
       (error) =>
       console.log(error)
@@ -110,12 +111,14 @@ data: any = {
     this.apiService.post("/article", this.data, true).subscribe(
       (response) => {
         this.messageService.add({severity:'success', summary:'Sucessfull!', detail:'Berhasil Menyimpan Data Baru!'});
-        this.isLoadingSave = false;
+
         this.display = false;
+        this.isLoading = false;
       },
       (error) => {
-        this.messageService.add({severity:'error', summary:'Error!', detail:'Gagal Menyimpan Data!'});
         this.isLoadingSave = false;
+        this.messageService.add({severity:'error', summary:'Error!', detail:'Gagal Menyimpan Data!'});
+
       }
     )
   }
@@ -162,8 +165,15 @@ data: any = {
 
   onUpload(event) {
     for(let file of event.files) {
+      if(file.size > 1000000){
+        this.messageService.add({severity:'error', summary:'Error!', detail:'Gagal Menyimpan! File Melebihi 1MB'});
+        return;
+      }else if(file.type.split('/')[0] != 'image'){
+        this.messageService.add({severity:'error', summary:'Error!', detail:'Gagal Menyimpan! File Harus Berupa Gambar'});
+        return;
+      }
        this.data.image = file;
-       console.log(file.size);
+       this.messageService.add({severity:'success', summary:'Sucessfull!', detail:'Berhasil Manambah Data!'});
     }
   }
 

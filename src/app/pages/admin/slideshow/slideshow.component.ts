@@ -3,6 +3,7 @@ import { ThrowStmt } from '@angular/compiler';
 import { ApiService } from 'src/app/service/api.service';
 import { MessageService } from 'primeng/api';
 import * as config from "../../../../json/config.json"
+import { Slideshow } from 'src/app/models/slideshow';
 
 @Component({
   selector: 'app-slideshow',
@@ -16,12 +17,17 @@ export class SlideshowComponent implements OnInit {
   isLoading: boolean = false;
   param:  string;
   number: number = 1;
-  
+
+  t
+
 selectedImage: any = {
   id : null,
   image: null,
   number: null,
 }
+
+slideshow: Slideshow;
+
   constructor(
     public apiService: ApiService,
     private messageService: MessageService) { }
@@ -35,24 +41,34 @@ selectedImage: any = {
 
     //get api
     this.getData();
-  
+
   }
 
- 
+
 getData(){
   this.isLoading = true;
   this.apiService.getWithToken("/slideshow").subscribe(
     (response) => {
       this.someSlideshow = response
       this.isLoading = false;
-      //console.log(this.someSlideshow);
+      let index = 1;
+      this.someSlideshow = this.someSlideshow.map((e) => {
+        this.slideshow = {
+          order: index,
+          id : e.id,
+          image: e.image,
+          number: e.number
+        }
+        index++;
+        return this.slideshow
+      })
     },
     (error) => {
      // console.log(error);
     }
   );
 }
-  
+
 //dialog
 showDialog(image: any = null) {
   this.messageService.clear();
@@ -75,10 +91,21 @@ data: any = {
 //upload file
 onUpload(event) {
   for(let file of event.files) {
+
+      if(file.size > 1000000){
+        this.messageService.add({severity:'error', summary:'Error!', detail:'Gagal Menyimpan! File Melebihi 1MB'});
+        return;
+      }else if(file.type.split('/')[0] != 'image'){
+        this.messageService.add({severity:'error', summary:'Error!', detail:'Gagal Menyimpan! File Harus Berupa Gambar'});
+        return;
+      }
      this.data.image = file;
+     this.messageService.add({severity:'success', summary:'Sucessfull!', detail:'Berhasil Manambah Data!'});
     // console.log(file);
   }
 }
+
+
 
 onClick(param: string){
    if (param == "add"){
@@ -106,16 +133,19 @@ onReject(){
 
 add(){
   this.data.number = this.selectedImage.number;
+  this.isLoading = true;
   this.apiService.post("/slideshow", this.data, true).subscribe(
     (response) => {
       //console.log(response);
       this.messageService.add({severity:'success', summary:'Sucessfull!', detail:'Berhasil Menyimpan Data Baru!'});
       this.getData();
       this.display = false;
+      this.isLoading = false;
     },
     (error) => {
       console.log(error);
       this.messageService.add({severity:'error', summary:'Error!', detail:'Gagal Menyimpan Data!'});
+      this.isLoading = false;
     }
   )
 }
@@ -124,17 +154,19 @@ edit(){
   this.data.number = this.selectedImage.number;
   this.data.id = this.selectedImage.id;
   this.data.oldImage = this.selectedImage.image;
+  this.isLoading = true;
   //console.log(this.data)
   this.apiService.put(`/slideshow/${this.data.id}`, this.data, true).subscribe(
     (response) => {
       console.log(response);
       this.messageService.add({severity:'success', summary:'Sucessfull!', detail:'Berhasil Merubah Data!'});
       this.display = false;
-      this.getData();
+      this.isLoading = false;
     },
     (error) => {
       console.log(error);
       this.messageService.add({severity:'error', summary:'Error!', detail:'Gagal Menyimpan Data!'});
+      this.isLoading = false;
     }
   )
 }
@@ -166,7 +198,7 @@ imageClick(image: any) {
 }
 //upload file
 uploadedFiles: any[] = [];
-  
+
 //table
 images: any;
 first = 0;
@@ -228,7 +260,7 @@ reset() {
 isLastPage(): boolean {
   return this.images ? this.first === (this.images.length - this.rows): true;
 }
-isFirstPage(): boolean {      
+isFirstPage(): boolean {
   return this.images ? this.first === 0 : true;
 }
 }

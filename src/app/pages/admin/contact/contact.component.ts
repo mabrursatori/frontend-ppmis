@@ -37,11 +37,14 @@ export class ContactComponent implements OnInit {
   }
 
   update(){
+    this.isLoading = true;
     this.apiService.put(`/contacts/${this.selectedItem.id}`, this.selectedItem).subscribe(
       (response) => {
+        this.isLoading = false;
         this.messageService.add({severity:'success', summary:'Sucessfull!', detail:'Berhasil Merubah Data!'});
       },
       (error) => {
+        this.isLoading = false;
         this.messageService.add({severity:'error', summary:'Error!', detail:'Gagal Merubah Data!'});
       }
     )

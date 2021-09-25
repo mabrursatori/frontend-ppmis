@@ -3,11 +3,11 @@
       <p-card>
           <div class="p-d-flex  p-flex-row-reverse">
               <p-button label="Edit" icon="pi pi-pencil" styleClass="p-button-sm p-button-success ml-2 mb-1" (click)="showDialog()"></p-button>
-              <p-toggleButton onLabel="On Logo" offLabel="Off Logo" 
+              <p-toggleButton onLabel="On Logo" offLabel="Off Logo"
               onIcon="pi pi-check" offIcon="pi pi-times" iconPos="right" (click)="clickIsLogo()" styleClass="p-button-sm" [(ngModel)]="checked"></p-toggleButton>
           </div>
           <table class="table">
-            
+
               <tbody>
                 <tr>
                   <th style="min-width: 200px;" scope="row">Logo</th>
@@ -32,15 +32,15 @@
                       <div style="line-height: 25px;" [innerHTML]="profile.contentHistory | safeHtml"></div>
                   </td>
                 </tr>
-              
+
               </tbody>
             </table>
-  
-  
+
+
             <!-- start dialog -->
       <p-dialog header="Title" [(visible)]="display" *ngIf="display" [style]="{'width':'800px'}">
           <div *ngIf="profile">
-              
+
                   <div class="p-fluid">
                       <div class="p-field">
                           <label for="logo">Logo</label>
@@ -52,7 +52,7 @@
                       </div>
                       <div class="p-field">
                           <label for="lastname1">Judul Profile</label>
-                          <input id="lastname1" type="text" [(ngModel)]="profile.titleHistory" pInputText> 
+                          <input id="lastname1" type="text" [(ngModel)]="profile.titleHistory" pInputText>
                       </div>
                       <div class="p-field">
                           <label for="pendaftaran">Gambar Profile</label>
@@ -65,12 +65,11 @@
                       <input type="hidden" [(ngModel)]="profile.id">
                   </div>
                   <button pButton type="button" label="Success" class="p-button-success" icon="pi pi-check" iconPos="left" (click)="onSave()"></button>
-            
+
           </div>
       </p-dialog>
-  
-      <!-- toast message -->
-      <p-toast></p-toast>
+
+
       </p-card>
   </div>
 </div>
@@ -79,9 +78,12 @@
   <div class="d-flex justify-content-center align-items-center" style="min-height: 100vh;">
     <div class=" d-inline-block">
         <p-progressSpinner ></p-progressSpinner>
-        
+
     </div>
 </div>
 </ng-template>
 
+
+<!-- toast message -->
+<p-toast></p-toast>
 
