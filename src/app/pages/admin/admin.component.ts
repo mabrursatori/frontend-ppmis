@@ -59,7 +59,7 @@ export class AdminComponent implements OnInit {
           //console.log(this.scrWidth);
 
             if(this.scrWidth < 900){
-            //  this.router.navigate(["/error"]);
+              this.router.navigate(["/error"]);
             }
     }
 
